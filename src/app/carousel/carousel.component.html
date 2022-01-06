@@ -1,0 +1,13 @@
+<div *ngIf="hideCarousel">
+  <div id="slider" >
+    <figure>
+      <img class="image-container" [src]="images[0]" >
+      <img class="image-container"  [src]="images[1]" >
+      <img  class="image-container" [src]="images[2]" >
+      <img class="image-container" [src]="images[3]" >
+      <img class="image-container" [src]="images[0]" >
+    </figure>
+  </div>
+  <app-main-content></app-main-content>
+</div>
+<div *ngIf="!hideCarousel" ><app-main-content></app-main-content></div>

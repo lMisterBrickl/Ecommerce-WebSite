@@ -1,0 +1,66 @@
+<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart')  ">
+  <mat-toolbar class="navbar-smaller">
+    <span><a  class="licenta">Licenta</a></span>
+
+    <div class="display-grid">
+      <input type="search" class="inputStyle" />
+      <a class="icon-color"><i class="material-icons">search</i></a>
+    </div>
+    <a
+      (mouseover)="mouseHover = true"
+      (click)="mouseHover = true"
+      (mouseleave)="onOut()"
+      class="iconPerson"
+      ><i class="material-icons">person_outline</i></a
+    >
+    <div class="cartItmes">
+    <div style="font: size 10px; margin-top: 5px; margin-right: 5px;">{{numItems}}</div>
+    <a class="icon-color" routerLink="/cart"><i class="material-icons">shopping_cart</i></a>
+    </div>
+  </mat-toolbar>
+  <mat-card
+    (mouseleave)="mouseHover = false"
+    (mouseover)="onIn()"
+    *ngIf="mouseHover"
+    class="dropMenu">
+    <a routerLink="/register" class="buttons"
+      ><button class="costumize-button">Register</button></a
+    >
+    <a routerLink="/login" class="buttons"
+      ><button class="costumize-button">Login</button></a
+    >
+  </mat-card>
+
+  <div *ngIf="hideFilterBar" class="sideBar">
+    <mat-card class="resize">
+      <a class="hide-underline" routerLink="/stuffs"><h1>Produse</h1></a>
+      <hr class="lineStyle" />
+      <ul class="listStyle">
+        <li><a routerLink="/stuffs" class="categoryStyle" mat-button>Televizoare</a></li>
+        <hr class="lineStyle" />
+        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Telefoane </a></li>
+        <hr class="lineStyle" />
+        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Aparate Foto</a></li>
+        <hr class="lineStyle" />
+        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Laptopuri</a></li>
+        <hr class="lineStyle" />
+        <li>
+          <a routerLink="/stuffs" class="categoryStyle" mat-button> Masini de Spalat</a>
+        </li>
+        <hr class="lineStyle" />
+        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Aragaze</a></li>
+        <hr class="lineStyle" />
+        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Pc/Componente</a></li>
+        <hr class="lineStyle" />
+      </ul>
+    </mat-card>
+    <a *ngIf="!hideGrey" (click)="hideMenu()" class="hide"> </a>
+  </div>
+
+  <div *ngIf="!hideFilterBar">
+    <button mat-button (click)="onMenu()"><mat-icon>menu</mat-icon></button>
+  </div>
+</div>
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>

@@ -1,0 +1,15 @@
+
+  <div class="post-style">
+    <div  *ngFor="let item of posts">
+      <mat-card class="content">
+          <mat-card-header>
+            <mat-card-title>{{item.title}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src={{item.photo}} />
+           <p>{{item.price}} Lei</p>
+          <mat-card-actions>
+            <a class="buttons" (click)=addToCart(item)><button class="costumize-button" >BUY!</button></a>
+          </mat-card-actions>
+      </mat-card>
+  </div>
+  </div>

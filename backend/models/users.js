@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require("mongoose-unique-validator")
 
 const userSchema = mongoose.Schema({
   username: { type: String, require:true, unique:true, lowecase:true},
@@ -8,4 +9,6 @@ const userSchema = mongoose.Schema({
   // cart: {type: Any}
 })
 
-module.export = mongoose.model('User', userSchema)
+userSchema.plugin(uniqueValidator)
+
+module.exports = mongoose.model('User', userSchema)

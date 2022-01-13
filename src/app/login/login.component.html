@@ -2,11 +2,11 @@
   <h1 style="color: rgb(109, 108, 108);">Login</h1>
   <form (submit)= "onLogin(regForm)" #regForm = "ngForm">
   <mat-form-field class="loginPosition">
-    <input matInput type="email" type="text" name="email" email ngModel required placeholder="email" />
+    <input matInput type="email" type="text" name="email" email ngModel required placeholder="Email" />
   </mat-form-field>
-  <mat-form-field>
+  <!-- <mat-form-field>
     <input matInput type="text" type="text" name="username" ngModel required placeholder="Username" />
-  </mat-form-field>
+  </mat-form-field> -->
   <mat-form-field class="loginPosition">
     <input matInput type="password" name="password" ngModel required placeholder="Password" #passwordInput/>
     <mat-error *ngIf="passwordInput">Try anouther password</mat-error>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from '../cart-service/cart-service';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ShopcartComponent implements OnInit {
   public grandTotal !: number
 
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private navbar:NavBarComponent) { }
 
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class ShopcartComponent implements OnInit {
   deleteItem(item: any){
     this.cartService.removeCartItem(item)
     this.grandTotal = this.cartService.getTotalPrice()
+    this.navbar.ngOnInit()
   }
 
   emptycart(){

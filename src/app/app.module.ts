@@ -26,9 +26,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
 import { AdministratorComponent } from './administrator/administrator.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import {MatTableModule} from '@angular/material/table';
+import { AuthInterceptor } from './auth-intercepter';
 
 
 
@@ -69,7 +70,7 @@ import {MatTableModule} from '@angular/material/table';
     HttpClientModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

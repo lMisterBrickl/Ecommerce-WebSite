@@ -24,6 +24,7 @@ export class CartService{
   }
 
   addtoCart(product:Post){
+
     if (this.cartItemList.includes(product)){
       this.cartItemList.map((a:Post,index:any)=>{
         if(a.id === product.id){
@@ -33,9 +34,11 @@ export class CartService{
       })
     }
     else{
+      console.log(product)
       this.cartItemList.push(product)
     }
     this.productList.next(this.cartItemList)
+    console.log(this.productList)
   }
 
 
@@ -61,6 +64,14 @@ export class CartService{
      grandTotal = grandTotal + parseInt(a.total)
    })
    return grandTotal
+ }
+
+ gettotalProducts(): number{
+    let totNum = 0
+    this.cartItemList.map((a:any)=>{
+      totNum = totNum + parseInt(a.quantity)
+    })
+    return totNum
  }
 
 

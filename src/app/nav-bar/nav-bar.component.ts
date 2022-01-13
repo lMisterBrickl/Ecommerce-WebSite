@@ -31,7 +31,7 @@ export class NavBarComponent implements OnInit {
     }
 
     this.cartService.getProduct().subscribe(res=>{
-      this.numItems = res.length
+      this.numItems = this.cartService.gettotalProducts()
     })
 
    }
@@ -59,6 +59,5 @@ export class NavBarComponent implements OnInit {
   hideMenu(): void{
     this.hideFilterBar = false
   }
-
 
 }

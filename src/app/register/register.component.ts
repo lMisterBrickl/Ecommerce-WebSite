@@ -10,14 +10,14 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent {
 
   constructor(public authService: AuthService ) { }
-
+  public isLoading = false
   
   onRegister(form: NgForm){
     if(form.invalid){
       return
     }else{
       this.authService.createUser(form.value.email, form.value.password, form.value.username)
+      this.isLoading = true
     }
   }
-
 }

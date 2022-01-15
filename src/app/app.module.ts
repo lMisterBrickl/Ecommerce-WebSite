@@ -30,6 +30,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import {MatTableModule} from '@angular/material/table';
 import { AuthInterceptor } from './auth-intercepter';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -68,7 +69,8 @@ import { AuthInterceptor } from './auth-intercepter';
     NgbModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true}],
   bootstrap: [AppComponent]

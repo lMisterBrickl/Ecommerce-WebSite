@@ -1,4 +1,4 @@
-<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart')" >
+<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart')" > 
   <mat-toolbar  class="navbar-smaller">
     <span><a  class="licenta">Licenta</a></span>
 
@@ -23,12 +23,19 @@
     (mouseover)="onIn()"
     *ngIf="mouseHover"
     class="dropMenu">
+    <div *ngIf="!this.isUserLogin">
     <a routerLink="/register" class="buttons"
       ><button class="costumize-button">Register</button></a
     >
     <a routerLink="/login" class="buttons"
       ><button class="costumize-button">Login</button></a
     >
+  </div>
+
+    <a *ngIf="this.isUserLogin" class="buttons"
+    ><button (click)="onLogOut()"   class="costumize-button">Logout</button></a
+  >
+    
   </mat-card>
 
   <div *ngIf="hideFilterBar" class="sideBar">

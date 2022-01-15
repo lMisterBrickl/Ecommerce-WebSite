@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(public authService: AuthService) { }
+  public isLoading = false
 
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.logiUser(form.value.email, form.value.password)
+    this.isLoading = true
   }
 
 }

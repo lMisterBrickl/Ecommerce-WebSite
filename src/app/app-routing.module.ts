@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { ShopcartComponent } from './shopcart/shopcart.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
@@ -19,12 +20,13 @@ const routes: Routes = [
   {path:"admin-login", component: AdminLoginComponent},
   {path:"admin-register", component:AdminRegisterComponent},
   {path:"management",component:AdministratorComponent},
-  {path:"cart", component:ShopcartComponent}
+  {path:"cart", component:ShopcartComponent, canActivate:[AuthGuard]}
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

@@ -20,12 +20,24 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   private authListenerSubs: Subscription = new Subscription;
   public numItems : number = 0
   public isUserLogin = false
+  public username:any
+  public newUsername:boolean = false
 
   constructor(public router: Router, private cartService: CartService, private authService: AuthService) {
   }
 
 
   ngOnInit(): void {
+
+    this.isUserLogin = this.authService.getisAuth()
+    this.username = this.authService.getUsername()
+    if(this.username && this.isUserLogin){
+      this.newUsername = true
+    }
+    else{
+      this.newUsername = false
+    }
+    
     if(window.screen.width < 1024){
       this.hideFilterBar = false
     }

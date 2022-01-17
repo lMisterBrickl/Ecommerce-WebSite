@@ -1,10 +1,12 @@
 const express = require("express");
-const User = require("../backend/models/users");
+const User = require("../backend/models/users").default;
 const mongoose = require("mongoose");
 const cors = require('cors')
 const userRoutes = require("./routes/user");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser")
+const productRoutes = require("./routes/product")
+
 
 
 app = express();
@@ -21,20 +23,6 @@ mongoose.connect('mongodb://localhost:27017/Licenta', function(err){
   app.use(express.json());
   app.use(express.urlencoded({extended:true}))
   app.use(cors())
-
-//  app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-//   );
-//   next();
-// });
-
 
 
 app.use('/api/posts',(req,res,next) =>{
@@ -69,29 +57,7 @@ app.use('/api/posts',(req,res,next) =>{
   next();
 })
 
+ app.use("/api", productRoutes);
  app.use("/api", userRoutes); 
 
-// app.use('/api/register',(res,req,next) => {
-//   bcrypt.hash(req.body.password, 10)
-//   .then(hash=>{
-//     const user = new User({
-//       username: req.body.username,
-//       password: hash,
-//       email: req.body.email
-//     });
-//     user.save()
-//     .then(result=>{
-//       res.status(201).json({
-//         message: 'User Created',
-//         result: result
-//       });
-//     })
-//     .catch(err => {
-//       res.status(500).json({
-//         error: err
-//       })
-//     })
-//   })
-//   next()
-// })
 module.exports = app;

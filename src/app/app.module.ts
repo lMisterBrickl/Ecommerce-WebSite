@@ -23,9 +23,9 @@ import { CarouselComponent } from './carousel/carousel.component'
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { AdminLoginComponent } from './admin-login/admin-login.component';
-import { AdminRegisterComponent } from './admin-register/admin-register.component';
-import { AdministratorComponent } from './administrator/administrator.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminRegisterComponent } from './admin/admin-register/admin-register.component';
+import { AdministratorComponent } from './admin/administrator/administrator.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import {MatTableModule} from '@angular/material/table';

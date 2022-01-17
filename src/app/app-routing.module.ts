@@ -1,13 +1,13 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AppComponent } from './app.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { LoginComponent } from './login/login.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { RegisterComponent } from './register/register.component';
-import { AdminRegisterComponent } from './admin-register/admin-register.component';
-import { AdministratorComponent } from './administrator/administrator.component';
+import { AdminRegisterComponent } from './admin/admin-register/admin-register.component';
+import { AdministratorComponent } from './admin/administrator/administrator.component';
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import { AuthGuard } from './auth.guard';
 

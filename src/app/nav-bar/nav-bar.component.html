@@ -1,3 +1,4 @@
+
 <div > 
   <mat-toolbar  class="toolbar">
     <div class="burger">
@@ -15,6 +16,27 @@
       <div *ngIf="!this.isUserLogin"><a routerLink="/login" class="signin">Sign in</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/register"class="signin">Register</a></div>
       <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}}>shopping_cart</mat-icon></a></div>  
+<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart') && (router.url!=='/management')" > 
+  <mat-toolbar  class="navbar-smaller">
+    <span><a  class="licenta">Licenta</a></span>
+
+    <div class="display-grid">
+      <input type="search" class="inputStyle" />
+      <a class="icon-color"><i class="material-icons">search</i></a>
+    </div>
+    <div class="cartItmes">
+    <a
+      (mouseover)="mouseHover = true"
+      (click)="mouseHover = true"
+      (mouseleave)="onOut()"
+      class="iconPerson"
+      ><i class="material-icons">person_outline</i></a
+    >
+    <p *ngIf="newUsername " style="font: size 10px; margin-top: 5px; margin-right: 5px;">{{username.username}}</p>
+  </div>
+    <div class="cartItmes">
+    <div style="font: size 10px; margin-top: 5px; margin-right: 5px;">{{numItems}}</div>
+    <a class="icon-color" routerLink="/cart"><i class="material-icons">shopping_cart</i></a>
     </div>
   </mat-toolbar>
   </div>

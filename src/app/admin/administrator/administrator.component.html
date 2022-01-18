@@ -1,0 +1,31 @@
+<mat-card >
+    <div class="cartDeisign">
+    <h1 style="color: rgb(109, 108, 108);">Add product</h1>
+    <form (submit)= "onAddProduct(prodForm)"  #prodForm = "ngForm">
+    <mat-form-field>
+      <input matInput type="text" type="text" name="title"  ngModel required placeholder="Title" />
+    </mat-form-field>
+     <mat-form-field>
+      <input matInput type="text" type="text" name="specification" ngModel required placeholder="Specification" />
+    </mat-form-field> 
+    <mat-form-field >
+      <input matInput type="text" name="price" ngModel required placeholder="Price"/>
+    </mat-form-field>
+     <mat-form-field > 
+      <input matInput type="text" name="quantity" ngModel required placeholder="quantity"/>
+   </mat-form-field>
+   <mat-form-field > 
+    <input matInput type="text" name="photo" ngModel required placeholder="Photo"/>
+ </mat-form-field>
+     <!-- <div >
+        <button type="button" mat-raised-button  ngModel (click)="fileInput.click()">Choose File</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    </div>  -->
+    <mat-form-field > 
+        <input matInput type="text" name="type" ngModel required placeholder="Type"/>
+    </mat-form-field>
+    <br>
+      <button mat-flat-button><div>Create</div></button>
+    </form>
+    </div>
+  </mat-card>

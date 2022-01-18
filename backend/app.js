@@ -1,7 +1,12 @@
 const express = require("express");
+
+const User = require("../backend/models/users").default;
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
+const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
+const productRoutes = require("./routes/product");
 
 app = express();
 
@@ -51,6 +56,9 @@ app.use("/api/posts", (req, res, next) => {
   next();
 });
 
+app.use("/api", userRoutes);
+
+app.use("/api", productRoutes);
 app.use("/api", userRoutes);
 
 module.exports = app;

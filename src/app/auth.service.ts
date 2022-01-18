@@ -43,9 +43,6 @@ export class AuthService{
         const newUsername = authData.username
         this.http.post<{token: string, expiresIn: number}>("http://localhost:3000/api/login", authData)
          .subscribe(response => {
-            setTimeout(()=>{
-                1000
-            })
              const token = response.token 
              this.token = token
              if(token){

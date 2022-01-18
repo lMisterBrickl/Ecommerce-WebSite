@@ -3,6 +3,6 @@ export interface productData{
     price: string,
     specification: string,
     photo: string,
-    quantity: string,
+    quantity: number,
     type:string,
 }

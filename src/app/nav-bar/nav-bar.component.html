@@ -1,24 +1,24 @@
-<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart')" > 
-  <mat-toolbar  class="navbar-smaller">
-    <span><a  class="licenta">Licenta</a></span>
-
-    <div class="display-grid">
-      <input type="search" class="inputStyle" />
-      <a class="icon-color"><i class="material-icons">search</i></a>
+<div > 
+  <mat-toolbar  class="toolbar">
+    <div class="burger">
+      <input type="checkbox" [(ngModel)]="toggle" id="toggle" class="toggle">
+      <label for="toggle"><mat-icon>menu</mat-icon></label>
     </div>
-    <a
-      (mouseover)="mouseHover = true"
-      (click)="mouseHover = true"
-      (mouseleave)="onOut()"
-      class="iconPerson"
-      ><i class="material-icons">person_outline</i></a
-    >
-    <div class="cartItmes">
-    <div style="font: size 10px; margin-top: 5px; margin-right: 5px;">{{numItems}}</div>
-    <a class="icon-color" routerLink="/cart"><i class="material-icons">shopping_cart</i></a>
+    <div>
+      <span><a  class="logo" routerLink="/">Licenta</a></span>
+    </div>
+    <div  class="Search">
+      <input type="text" placeholder="Caută...">
+      <div><a ><mat-icon>search</mat-icon></a></div>
+    </div>
+    <div class="actions">
+      <div *ngIf="!this.isUserLogin"><a routerLink="/login" class="signin">Sign in</a></div>
+      <div *ngIf="!this.isUserLogin"><a routerLink="/register"class="signin">Register</a></div>
+      <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}}>shopping_cart</mat-icon></a></div>  
     </div>
   </mat-toolbar>
-  <mat-card
+  </div>
+ <!-- <mat-card
     (mouseleave)="mouseHover = false"
     (mouseover)="onIn()"
     *ngIf="mouseHover"
@@ -36,38 +36,32 @@
     ><button (click)="onLogOut()"   class="costumize-button">Logout</button></a
   >
     
-  </mat-card>
-
-  <div *ngIf="hideFilterBar" class="sideBar">
-    <mat-card class="resize">
-      <a class="hide-underline" routerLink="/stuffs"><h1>Produse</h1></a>
-      <hr class="lineStyle" />
-      <ul class="listStyle">
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button>Televizoare</a></li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Telefoane </a></li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Aparate Foto</a></li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Laptopuri</a></li>
-        <hr class="lineStyle" />
+  </mat-card>-->
+ <div>
+  <nav @sideBar class="sideBar" *ngIf="toggle">
+      <ul>
+        <li><a routerLink="/stuffs" >Televizoare</a></li>
+        <hr/>
+        <li><a routerLink="/stuffs" > Telefoane </a></li>
+        <hr/>
+        <li><a routerLink="/stuffs"  > Aparate Foto</a></li>
+        <hr/>
+        <li><a routerLink="/stuffs"> Laptopuri</a></li>
+        <hr/>
         <li>
-          <a routerLink="/stuffs" class="categoryStyle" mat-button> Masini de Spalat</a>
+          <a routerLink="/stuffs"> Masini de Spalat</a>
         </li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Aragaze</a></li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Pc/Componente</a></li>
-        <hr class="lineStyle" />
+        <hr/>
+        <li><a routerLink="/stuffs"> Aragaze</a></li>
+        <hr/>
+        <li><a routerLink="/stuffs"> Pc/Componente</a></li>
+        <hr/>
       </ul>
-    </mat-card>
     <a *ngIf="!hideGrey" (click)="hideMenu()" class="hide"> </a>
-  </div>
+  </nav> 
 
-  <div *ngIf="!hideFilterBar">
-    <button mat-button (click)="onMenu()"><mat-icon>menu</mat-icon></button>
-  </div>
 </div>
-  <div class="main">
+  <div class="hero">
     <router-outlet></router-outlet>
+    <router-outlet name='secondary'></router-outlet>
   </div>

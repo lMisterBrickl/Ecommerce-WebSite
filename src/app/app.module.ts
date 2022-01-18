@@ -31,6 +31,7 @@ import { ShopcartComponent } from './shopcart/shopcart.component';
 import {MatTableModule} from '@angular/material/table';
 import { AuthInterceptor } from './auth-intercepter';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 
@@ -70,7 +71,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FlexLayoutModule,
     HttpClientModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatBadgeModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true}],
   bootstrap: [AppComponent]

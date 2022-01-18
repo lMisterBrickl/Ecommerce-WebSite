@@ -14,7 +14,8 @@ import { ShopcartComponent } from './shopcart/shopcart.component';
 const routes: Routes = [
   {path:"register", component: RegisterComponent},
   {path:"stuffs", component: MainContentComponent},
-  {path:"", component:CarouselComponent},
+  {path:"", component:CarouselComponent,},
+  {path:"",component:MainContentComponent, outlet:'secondary'},
   {path:"login",component: LoginComponent},
   {path:"admin-login", component: AdminLoginComponent},
   {path:"admin-register", component:AdminRegisterComponent},

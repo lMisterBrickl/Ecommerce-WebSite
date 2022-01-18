@@ -1,15 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-
+:root {
+  --clr-primary: #00b5dede;
+  --clr-secondary: blanchedalmond;
+  --clr-accent: #37ff14;
+  --clr-warn: #f9f871;
+  --clr-danger: #ff525c;
+}
 html,
 body {
   height: 100%;
-  width: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 0;
+  font-family: "Roboto Mono", monospace;
 }
 * {
+  user-select: none;
   box-sizing: border-box;
   user-select: none;
 }

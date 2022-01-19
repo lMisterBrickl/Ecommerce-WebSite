@@ -9,14 +9,17 @@
       <span><a  class="logo" routerLink="/">Licenta</a></span>
     </div>
     <div  class="Search">
-      <input type="text" placeholder="Caută...">
+      <input type="text" placeholder="Caută..." onfocus="this.placeholder=''" onblur="this.placeholder='Cauta...'">
       <div><a ><mat-icon>search</mat-icon></a></div>
     </div>
     <div class="actions">
       <div *ngIf="!this.isUserLogin"><a routerLink="/login" class="signin">Sign in</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/register"class="signin">Register</a></div>
-      <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}}>shopping_cart</mat-icon></a></div>  
-<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart') && (router.url!=='/management')" > 
+      <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}}>shopping_cart</mat-icon></a></div>
+    </div>
+    </mat-toolbar>  
+    </div>
+<!--<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart') && (router.url!=='/management')" > 
   <mat-toolbar  class="navbar-smaller">
     <span><a  class="licenta">Licenta</a></span>
 
@@ -39,7 +42,7 @@
     <a class="icon-color" routerLink="/cart"><i class="material-icons">shopping_cart</i></a>
     </div>
   </mat-toolbar>
-  </div>
+  </div>-->
  <!-- <mat-card
     (mouseleave)="mouseHover = false"
     (mouseover)="onIn()"
@@ -85,5 +88,4 @@
 </div>
   <div class="hero">
     <router-outlet></router-outlet>
-    <router-outlet name='secondary'></router-outlet>
   </div>

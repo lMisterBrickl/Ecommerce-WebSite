@@ -16,10 +16,10 @@ import { CartService } from '../cart-service/cart-service';
   animations:[
     trigger('sideBar',[
       transition(':enter',[
-        style({transform:'scale(0,1)'}),animate('200ms ease-in')
+        style({transform:'translateX(-100%)'}),animate('300ms ease-in')
       ]),
       transition(':leave',[
-        animate('200ms ease-out',style({transform:'scale(0,1)'}))
+        animate('300ms ease-out',style({transform:'translateX(-100%)'}))
       ])
     ])
   ]

@@ -14,6 +14,11 @@ import { CartService } from '../cart-service/cart-service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
   animations:[
+    trigger('burger',[
+      transition(':enter',[
+        style({opacity:0,transform:'rotateY(-180deg)'}),animate('300ms')
+      ])
+    ]),
     trigger('sideBar',[
       transition(':enter',[
         style({transform:'translateX(-100%)'}),animate('300ms ease-in')
@@ -27,8 +32,6 @@ import { CartService } from '../cart-service/cart-service';
 export class NavBarComponent implements OnInit,  OnDestroy {
   public mouseHover = false;
   var1: any
-  public hideFilterBar = false;
-  public hideGrey = true;
   private authListenerSubs: Subscription = new Subscription;
   public numItems : number = 0
   public isUserLogin = false
@@ -52,13 +55,6 @@ export class NavBarComponent implements OnInit,  OnDestroy {
     else{
       this.newUsername = false
     }
-    
-    if(window.screen.width < 1024){
-      this.hideFilterBar = false
-    }
-    else{
-      this.hideFilterBar = true
-    }
 
     this.cartService.getProduct().subscribe(res=>{
       this.numItems = this.cartService.gettotalProducts()
@@ -80,19 +76,6 @@ export class NavBarComponent implements OnInit,  OnDestroy {
  // onIn(){
   //  clearTimeout(this.var1)
   //}
-
-  onMenu(): void{
-    if(this.hideFilterBar === true){
-      this.hideFilterBar = false;
-    }
-    else{
-      this.hideFilterBar= true;
-    }
-  }
-
-  hideMenu(): void{
-    this.hideFilterBar = false
-  }
 
   onLogOut(){
     this.authService.logout()

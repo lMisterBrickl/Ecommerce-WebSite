@@ -3,7 +3,8 @@
   <mat-toolbar  class="toolbar">
     <div class="burger">
       <input type="checkbox" [(ngModel)]="toggle" id="toggle" class="toggle">
-      <label for="toggle"><mat-icon>menu</mat-icon></label>
+      <label @burger for="toggle" *ngIf="!toggle"><mat-icon>menu</mat-icon></label>
+      <label @burger for="toggle" *ngIf="toggle"><mat-icon>close</mat-icon></label>
     </div>
     <div>
       <span><a  class="logo" routerLink="/">Licenta</a></span>
@@ -15,7 +16,7 @@
     <div class="actions">
       <div *ngIf="!this.isUserLogin"><a routerLink="/login" class="signin">Sign in</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/register"class="signin">Register</a></div>
-      <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}}>shopping_cart</mat-icon></a></div>
+      <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}} matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a></div>
     </div>
     </mat-toolbar>  
     </div>
@@ -82,7 +83,6 @@
         <li><a routerLink="/stuffs"> Pc/Componente</a></li>
         <hr/>
       </ul>
-    <a *ngIf="!hideGrey" (click)="hideMenu()" class="hide"> </a>
   </nav> 
 
 </div>

@@ -7,12 +7,13 @@ import { CartService } from '../cart-service/cart-service';
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
-  styleUrls: ['./main-content.component.css']
+  styleUrls: ['./main-content.component.scss']
 })
 export class MainContentComponent implements OnInit {
 
   posts: Post[] = [];
   private postSub: Subscription | undefined
+  images = ["../../assets/images/carousel-laptop.jpg", "../../assets/images/iphone12.jpg", "../../assets/images/pcscump.jpg", "../../assets/images/TV.jpg"];
 
   constructor(public postService: PostsService,private cartService:CartService) { }
 

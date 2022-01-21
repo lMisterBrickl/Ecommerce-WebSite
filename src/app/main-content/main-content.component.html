@@ -1,25 +1,41 @@
-
-  <div id="slider" class="carus" >
+<div class="hero">
+ <!-- <div id="slider">
     <figure>
-      <img class="image-container" [src]="images[0]" >
-      <img class="image-container"  [src]="images[1]" >
-      <img  class="image-container" [src]="images[2]" >
-      <img class="image-container" [src]="images[3]" >
-      <img class="image-container" [src]="images[0]" >
+      <img [src]="images[0]" >
+      <img [src]="images[1]" >
+      <img [src]="images[2]" >
+      <img [src]="images[3]" >
+      <img [src]="images[0]" >
     </figure>
+  </div>-->
+  <div class="carousel">
+    <div *ngIf="i==0" class="banner">
+    <img [src]="images[0]" @image>
+    <div class="text">
+      <h1 class="title" @title>Lorem ipsum dolor sit amet</h1>
+      <p class="description" @text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis doloremque expedita quod quam pariatur praesentium aut cumque at quia repellendus.</p>
+      <h1 class="price" @text >250lei</h1>
+    </div>
+    </div>
+    <div *ngIf="i==1" class="banner" >
+      <img [src]="images[1]" @image>
+      <div class="text">
+        <h1 class="title" @title>Lorem ipsum dolor sit amet</h1>
+        <p class="description" @text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis doloremque expedita quod quam pariatur praesentium aut cumque at quia repellendus.</p>
+        <h1 class="price" @text >250lei</h1>
+      </div>
+      </div>
   </div>
+ <div class="prod-grid">
+  <div *ngFor="let item of posts" class="content">
+    <img src={{item.photo}} />
+    <div class="text">
+      <h1>{{item.title}}</h1>
+      <p>{{item.text}}</p>
+      <a class="more">...Mai mult</a>
+      <h1 class="price">{{item.price}} Lei</h1>
+      <a class="add" (click)=addToCart(item)>Adauga in cos</a>
+    </div>
+  </div>
+</div>
 
-  <div class="post-style">
-    <div  *ngFor="let item of posts">
-      <mat-card class="content">
-          <mat-card-header>
-            <mat-card-title>{{item.title}}</mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src={{item.photo}} />
-           <p>{{item.price}} Lei</p>
-          <mat-card-actions>
-            <a class="buttons" (click)=addToCart(item)><button class="costumize-button" >BUY!</button></a>
-          </mat-card-actions>
-      </mat-card>
-  </div>
-  </div>

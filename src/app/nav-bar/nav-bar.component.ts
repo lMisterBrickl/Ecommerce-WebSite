@@ -66,17 +66,6 @@ export class NavBarComponent implements OnInit,  OnDestroy {
 
    }
 
-
- // onOut(){
-  // this.var1 = setTimeout(()=>{
-  //    if(true)
-  //      this.mouseHover = false
-  //  },1100)
- // }
- // onIn(){
-  //  clearTimeout(this.var1)
-  //}
-
   onLogOut(){
     this.authService.logout()
   }

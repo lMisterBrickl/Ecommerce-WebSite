@@ -8,7 +8,6 @@
   position: fixed;
   z-index: 5;
   top: 0;
-  border-radius: 0 0 30px 30px;
   a {
     text-decoration: none;
   }
@@ -43,12 +42,12 @@
   a {
     vertical-align: middle;
     color: rgba($color: #000000, $alpha: 0.7);
-    background-color: rgba($color: #000000, $alpha: 0.1);
+    background-color: var(--clr-accent);
     border-radius: 0 50px 50px 0;
     padding-top: 8px;
     padding-right: 5px;
-    &:hover {
-      background-color: var(--clr-accent);
+    &:active {
+      box-shadow: inset 4px 4px 15px 0px #0000005e;
     }
   }
 }
@@ -92,7 +91,7 @@
   position: fixed;
   z-index: 2;
   top: 5em;
-  background-color: #00b5de;
+  background-color: var(--clr-primary);
   padding: 8em 0.5em 0em 1em;
   transform-origin: left;
   border-radius: 0 15px 15px 0;
@@ -111,7 +110,7 @@
     a {
       text-decoration: none;
       font-size: 2.3em;
-      color: rgba(255, 235, 205, 0.781);
+      color: var(--clr-secondary);
       font-family: "Dongle", sans-serif;
       font-weight: 100;
       padding: 0.5em 0.8em 0.5em 0;

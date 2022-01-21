@@ -74,21 +74,24 @@ p {
     margin-top: 10px;
   }
 }
-*/
+
 #slider {
   overflow: hidden;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 1%;
-  width: 80%;
-  height: 45vh;
+  height: 18vh;
+  width: 40%;
+  margin: auto;
+  background-color: blue;
+
+  img {
+    object-fit: cover;
+    height: 18vh;
+    aspect-ratio: 1/1;
+  }
 }
 
 #slider figure {
   position: relative;
   width: 500%;
-  margin: 0%;
-  left: 0%;
   animation: 20s slider infinite;
 }
 
@@ -124,5 +127,114 @@ p {
   }
   100% {
     left: -400%;
+  }
+}
+*/
+.hero {
+  padding-top: 4.5rem;
+  overflow-x: hidden;
+}
+.carousel {
+  display: flex;
+  background-color: black;
+  color: blanchedalmond;
+  width: 100%;
+  height: 20rem;
+  h1 {
+    text-align: center;
+    font-size: xx-large;
+  }
+  .description {
+    text-align: center;
+  }
+  .price {
+    text-align: end;
+    color: var(--clr-danger);
+  }
+  .banner {
+    width: 100%;
+    display: flex;
+    gap: 4em;
+    justify-content: space-between;
+    padding: 1em 2em;
+    img {
+      height: auto;
+      width: 40%;
+      object-fit: contain;
+      float: left;
+    }
+  }
+  .text {
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    justify-content: space-around;
+  }
+}
+
+.prod-grid {
+  padding: 5rem 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+.content {
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(76, 116, 113, 1) 100%
+  );
+  height: 45vh;
+  image-rendering: crisp-edges;
+  image-rendering: optimizeQuality;
+  img {
+    width: 60%;
+    object-fit: contain;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    color: var(--clr-secondary);
+    text-align: center;
+    p {
+      height: 5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .price {
+      color: var(--clr-danger);
+      text-align: end;
+    }
+    .more {
+      color: var(--clr-accent);
+    }
+    .add {
+      background-color: var(--clr-danger);
+      margin: 0;
+      align-self: flex-end;
+      padding: 1em 3em;
+      color: var(--clr-secondary);
+      text-decoration: none;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .banner {
+    img {
+      object-fit: cover;
+    }
+  }
+  .hero {
+    padding-top: 4rem;
+  }
+  .prod-grid {
+    padding: 1em;
   }
 }

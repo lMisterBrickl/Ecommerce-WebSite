@@ -2,7 +2,7 @@ export interface Post{
   id:string;
   title:string;
   price:number;
-  specification:string;
+  text:string;
   photo:string;
   quantity:number
 }

@@ -199,18 +199,27 @@ p {
   .text {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     margin: auto;
     color: var(--clr-secondary);
     text-align: center;
     p {
-      height: 5rem;
+      height: 6em;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .price {
+      display: flex;
+      margin: 0 0 0 25vw;
+      padding: 0;
+      height: 2rem;
+    }
+    .new {
       color: var(--clr-danger);
-      text-align: end;
+      margin: 0;
+    }
+    .old {
+      text-decoration: line-through;
     }
     .more {
       color: var(--clr-accent);

@@ -33,7 +33,10 @@
       <h1>{{item.title}}</h1>
       <p>{{item.text}}</p>
       <a class="more">...Mai mult</a>
-      <h1 class="price">{{item.price}} Lei</h1>
+      <div class="price">
+      <p class="old">{{item.oldprice}}</p>
+      <h1 class="new">{{item.price}} Lei</h1>
+      </div>
       <a class="add" (click)=addToCart(item)>Adauga in cos</a>
     </div>
   </div>

@@ -1,19 +1,38 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 const router = express.Router()
 const Product = require("../models/products")
-const jwt = require("jsonwebtoken");
-const products = require("../models/products");
+const ObjectId = require('mongo-objectid');
+const multer  = require('multer');
+const path = require("path");
+const list = require("../app")
 
-router.post("/addProduct",(req, res, next) =>{
+const date = Date.now()
+let originalName = ""
+let patthPhoto = ""
+
+const storage = multer.diskStorage({
+    destination:"/licenta/Licenta/src/assets/images/",
+    filename: function(req,photo, cb){
+        originalName = photo.originalname
+        patthPhoto = path.extname(photo.originalname)
+        cb(null, photo.originalname + '-' + date +
+        path.extname(photo.originalname))
+    }
+})
+
+const upload = multer({storage:storage})
+
+router.post("/addProduct",upload.single("photo"),(req, res, next) =>{
     const product = new Product({
         title: req.body.title ,
         price: req.body.price,
         specification: req.body.specification,
-        photo: req.body.photo,
-        quantity: req.body.quantity,
+        photo: "../../src/assets/images/" + originalName + '-' + date + patthPhoto, 
+        quantity: parseInt(req.body.quantity),
         type: req.body.type,
+        
     })
+
     product.save()
     .then(result=>{
         res.status(201).json({
@@ -32,38 +51,36 @@ router.post("/addProduct",(req, res, next) =>{
 
 
 router.use("/posts", (req, res, next)=>{
-    // const posts = [{
-    //     id: '01',
-    //     title: 'Tv Samsung',
-    //     price: '1500',
-    //     specification: 'diagonala 56 inch',
-    //     photo: '../../assets/images/TV.jpg',
-    //     quantity: 1
-    //   },
-    //   {
-    //     id: '02',
-    //     title: 'Iphone 12',
-    //     price: '3000',
-    //     specification: '128gb',
-    //     photo: '../../assets/images/iphone12.jpg',
-    //     quantity: 1
-    //   },
-    //   {
-    //     id: '03',
-    //     title: 'Pc Gaming',
-    //     price: '3500',
-    //     specification: 'i5 11600 gtx 1660',
-    //     photo: '../../assets/images/pcscump.jpg',
-    //     quantity: 1
-    //   }]
     Product.find().then(posts =>{
         res.status(200).json({
             posts
           })
-          next();
-    })
-        
-    
+          
+    })  
 })
+
+// router.post("/updateProduct",(req,res,next)=>{
+//     const product = new Product({
+//         title: req.body.title ,
+//         price: req.body.price,
+//         specification: req.body.specification,
+//         photo: "../../src/assets/images/" + originalName + '-' + date + patthPhoto, 
+//         quantity: parseInt(req.body.quantity),
+//         type: req.body.type,
+//     })
+
+//     Product.findByIdAndUpdate(list[1],product,(error, data)=>{
+//         if(error){
+//             console.log(error)
+//         }
+//         else{
+//             console.log(data)
+//         }
+//     })
+
+
+// })
+
+
 
 module.exports = router; 

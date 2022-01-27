@@ -26,16 +26,21 @@ export class AuthService{
         return this.isAuthenticated;
     }
 
-    createUser(email: string, password:string, username:string){
-        const authData: AuthData = {email: email, password: password, username: username}
-        this.realAuthdata = authData
-        //console.log(authData.username)
-        this.http.post("http://localhost:3000/api/register", authData)
-        .subscribe(response =>{
-            console.log(response)
-            this.router.navigate(['/login'])
+    createUser(email: string, password:string, username:string, retryPassowrd: String){
+        if(retryPassowrd != password){
+            return
+        }
+        else{
+            const authData: AuthData = {email: email, password: password, username: username}
+            this.realAuthdata = authData
+
+            this.http.post("http://localhost:3000/api/register", authData)
+            .subscribe(response =>{
+                console.log(response)
+                this.router.navigate(['/login'])
         })
-        //console.log(authData)
+
+        }
     }
 
     logiUser(email:string, password: string,username:string){

@@ -16,7 +16,7 @@ export class RegisterComponent {
     if(form.invalid){
       return
     }else{
-      this.authService.createUser(form.value.email, form.value.password, form.value.username)
+      this.authService.createUser(form.value.email, form.value.password, form.value.username, form.value.retryPassword)
       this.isLoading = true
     }
   }

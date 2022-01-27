@@ -8,37 +8,39 @@
       <img [src]="images[0]" >
     </figure>
   </div>-->
-  <div class="carousel">
-    <div *ngIf="i==0" class="banner">
-    <img [src]="images[0]" @image>
-    <div class="text">
-      <h1 class="title" @title>Lorem ipsum dolor sit amet</h1>
-      <p class="description" @text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis doloremque expedita quod quam pariatur praesentium aut cumque at quia repellendus.</p>
-      <h1 class="price" @text >250lei</h1>
-    </div>
-    </div>
-    <div *ngIf="i==1" class="banner" >
-      <img [src]="images[1]" @image>
-      <div class="text">
-        <h1 class="title" @title>Lorem ipsum dolor sit amet</h1>
-        <p class="description" @text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis doloremque expedita quod quam pariatur praesentium aut cumque at quia repellendus.</p>
-        <h1 class="price" @text >250lei</h1>
-      </div>
-      </div>
-  </div>
+
+<a class="banner-action" *ngIf="product" routerLink="product/{{product.id}}">
+<div class="carousel">
+    <ng-container *ngFor="let item of posts" >
+      <div *ngIf="item.id==product.id" class="banner">
+        <img src={{item.photo}} @image>
+        <div class="text">
+          <h1 class="title" @title>{{item.title}}</h1>
+          <p class="description" @text>{{item.text}}</p>
+          <p class="old" @text>{{item.oldprice}}</p>
+          <h1 class="price" @text >{{item.price}}</h1>         
+        </div>
+       </div>
+    </ng-container>
+</div>
+</a>
  <div class="prod-grid">
   <div *ngFor="let item of posts" class="content">
+    <a routerLink="product/{{item.id}}" class="img-action">
     <img src={{item.photo}} />
+  </a>
     <div class="text">
       <h1>{{item.title}}</h1>
-      <p>{{item.text}}</p>
-      <a class="more">...Mai mult</a>
+      <p class="description">{{item.text}}</p>
+      <a class="more" routerLink="product/{{item.id}}">...Mai mult</a>
       <div class="price">
-      <p class="old">{{item.oldprice}}</p>
-      <h1 class="new">{{item.price}} Lei</h1>
-      </div>
+        <p class="old">{{item.oldprice}}</p>
+        <h1 class="new">{{item.price}} Lei</h1>
       <a class="add" (click)=addToCart(item)>Adauga in cos</a>
-    </div>
+      </div>
+      </div>
   </div>
 </div>
+
+
 

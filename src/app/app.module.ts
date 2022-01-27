@@ -32,6 +32,7 @@ import {MatTableModule} from '@angular/material/table';
 import { AuthInterceptor } from './auth-intercepter';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatBadgeModule} from '@angular/material/badge';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 
 
@@ -49,6 +50,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     AdminRegisterComponent,
     AdministratorComponent,
     ShopcartComponent,
+    ProductPageComponent,
 
   ],
   imports: [

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription,Observable } from 'rxjs';
 import { PostsService } from '../posts.service';
 import { Post } from '../post.model'
 import { CartService } from '../cart-service/cart-service';
@@ -32,19 +32,21 @@ import { trigger,transition, animate,style, state, query } from '@angular/animat
   ]
 })
 export class MainContentComponent implements OnInit {
-
+  file:File
   posts: Post[] = [];
-  private postSub: Subscription | undefined
+  public postSub: Subscription | undefined
   public i=0
+  public product:Post
+  
   images = ["../../assets/images/tvpng.png", "../../assets/images/iphone12.jpg", "../../assets/images/pcscump.jpg", "../../assets/images/TV.jpg"];
 
   constructor(public postService: PostsService,private cartService:CartService) { }
-
 
   ngOnInit(): void {
     this.postService.getPost()
     this.postSub = this.postService.getPostUpdateListener().subscribe((posts:Post[]) => {
       this.posts = posts
+      this.product= this.posts[0]
       this.posts.forEach((a:any)=>{
         Object.assign(a,{total:a.price})
       })
@@ -56,15 +58,16 @@ export class MainContentComponent implements OnInit {
     this.cartService.addtoCart(item)
   }
   carouselanimation(){
-    if(this.i==0){
-        this.i=1
+    if(this.i<this.posts.length-1){
+        this.product=this.posts[++this.i]
     }
     else{
       this.i=0
+      this.product=this.posts[0]
     }
     setTimeout(() => {
       this.carouselanimation()
-    }, 6000);
+    }, 2000);
     
   }
 }

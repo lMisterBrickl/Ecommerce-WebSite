@@ -1,8 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
-import { AppComponent } from './app.component';
-import { CarouselComponent } from './carousel/carousel.component';
 import { LoginComponent } from './login/login.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { RegisterComponent } from './register/register.component';
@@ -10,6 +8,7 @@ import { AdminRegisterComponent } from './admin/admin-register/admin-register.co
 import { AdministratorComponent } from './admin/administrator/administrator.component';
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import { AuthGuard } from './auth.guard';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 
 const routes: Routes = [
@@ -20,7 +19,8 @@ const routes: Routes = [
   {path:"admin-login", component: AdminLoginComponent},
   {path:"admin-register", component:AdminRegisterComponent},
   {path:"management",component:AdministratorComponent},
-  {path:"cart", component:ShopcartComponent, canActivate:[AuthGuard]}
+  {path:"cart", component:ShopcartComponent},
+  {path:"product/:id", component:ProductPageComponent }
 
 ];
 

@@ -7,7 +7,8 @@ import { Router } from "@angular/router";
 @Injectable({ providedIn: "root"})
 export class AuthService{
     private token: any
-  
+
+    public isAdmin: number
     private authStatusListener = new Subject<boolean>()
     private isAuthenticated = false
     private realAuthdata:any
@@ -31,7 +32,7 @@ export class AuthService{
             return
         }
         else{
-            const authData: AuthData = {email: email, password: password, username: username}
+            const authData = {email: email, password: password, username: username}
             this.realAuthdata = authData
 
             this.http.post("http://localhost:3000/api/register", authData)
@@ -44,12 +45,13 @@ export class AuthService{
     }
 
     logiUser(email:string, password: string,username:string){
-        const authData: AuthData = {email: email, password: password, username: username}
+        const authData = {email: email, password: password, username: username}
         const newUsername = authData.username
         this.http.post<{token: string, expiresIn: number}>("http://localhost:3000/api/login", authData)
          .subscribe(response => {
              const token = response.token 
-             this.token = token
+             this.token = token    
+             console.log(this.isAdmin)
              if(token){
                 const expiresInDuration = response.expiresIn
                 this.setAuthTimer(expiresInDuration)
@@ -58,13 +60,14 @@ export class AuthService{
                 this.authStatusListener.next(true)
                 const timeNow = new Date()
                 const expireDate = new Date(timeNow.getTime() + (expiresInDuration * 1000))
-                this.saveAuthData(token,expireDate,newUsername)
+                this.saveAuthData(token,expireDate,newUsername,this.isAdmin)
                 this.router.navigate(['/'])
                
              }
             
          })
     }
+
 
  
 
@@ -96,10 +99,11 @@ export class AuthService{
     }
 
 
-    private saveAuthData(token:string, expirationDate: Date, username:string){
+    private saveAuthData(token:string, expirationDate: Date, username:string, category: number){
         localStorage.setItem('token',token)
         localStorage.setItem('expiration', expirationDate.toISOString())
         localStorage.setItem("username", username)
+
     }
 
     private setAuthTimer(duration:number){
@@ -113,8 +117,8 @@ export class AuthService{
         localStorage.removeItem("token")
         localStorage.removeItem("expiration")
         localStorage.removeItem("username")
-
     }
+
 
     public getUsername(){
         const token = localStorage.getItem("token")
@@ -127,6 +131,9 @@ export class AuthService{
             username: username
         }
     }
+
+
+
 
     private getAuthData(){
         const token = localStorage.getItem("token")

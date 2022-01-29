@@ -56,38 +56,21 @@ router.post("/adminRegister", (req, res, next) =>{
 });
 
 
-router.post("/adminLogin", (req,res)=>{
-  let fetchedUser
-  User.findOne({email:req.body.email}).then(user =>{
+router.post('/getRole', (req,res)=>{
+
+  User.findOne({username: req.body.username}).then(user=>{
+    console.log(user)
     if(!user){
-      return res.status(401).json({
-        message: "Auth Faile"
+      return res.status(404).json({
+        message:"404"
       })
     }
-    fetchedUser = user
-    return bcrypt.compare(req.body.password, user.password)
-  }).then(result =>{
-    if(!result){
-      return res.status(401).json({
-        message: "Auth Fail"
-      })
-    }
-    const token = jwt.sign({email: fetchedUser.email, userId: fetchedUser._id},
-      "secret_this_should_be_longer",
-      {expiresIn: '1h'}
-      )
-      res.status(200).json({
-        token: token,
-        expiresIn: 3600
-      })
-   })
-   .catch(err => {
-     return res.status(401).json({
-       message: "Auth Fail",
-       error: err
-     })
-   })
+    return res.status(200).json({
+        role: user.category
+    })
+  })
 })
+
 
 
 router.post("/login", (req, res, next)=>{
@@ -114,7 +97,8 @@ router.post("/login", (req, res, next)=>{
       )
       res.status(200).json({
         token: token,
-        expiresIn: 3600
+        expiresIn: 3600,
+        category: fetchedUser.category
       })
    })
    .catch(err => {

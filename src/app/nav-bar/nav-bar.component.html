@@ -1,6 +1,6 @@
 <div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart') && (router.url!=='/management')" > 
   <mat-toolbar  class="navbar-smaller">
-    <span><a  class="licenta">Licenta</a></span>
+    <span><a href="/" class="licenta">Licenta</a></span>
 
     <div class="display-grid">
       <input type="search" class="inputStyle" />
@@ -43,24 +43,21 @@
 
   <div *ngIf="hideFilterBar" class="sideBar">
     <mat-card class="resize">
-      <a class="hide-underline" routerLink="/stuffs"><h1>Produse</h1></a>
+      <a href="/stuffs" class="hide-underline" ><h1>Produse</h1></a>
       <hr class="lineStyle" />
       <ul class="listStyle">
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button>Televizoare</a></li>
+        
+        <li><a (click)="onSearchProduct('Televizoare')"   class="categoryStyle" ngModel mat-button>Televizoare</a></li>
+
         <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Telefoane </a></li>
+        <li><a (click)="onSearchProduct('Telefoane')" class="categoryStyle" mat-button> Telefoane </a></li>
         <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Aparate Foto</a></li>
+        <li><a (click)="onSearchProduct('Aparate_Foto')" class="categoryStyle" mat-button> Aparate Foto</a></li>
         <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Laptopuri</a></li>
+        <li><a (click)="onSearchProduct('Laptopuri')" class="categoryStyle" mat-button> Laptopuri</a></li>
         <hr class="lineStyle" />
-        <li>
-          <a routerLink="/stuffs" class="categoryStyle" mat-button> Masini de Spalat</a>
-        </li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Aragaze</a></li>
-        <hr class="lineStyle" />
-        <li><a routerLink="/stuffs" class="categoryStyle" mat-button> Pc/Componente</a></li>
+  
+        <li><a (click)="onSearchProduct('Pc')" class="categoryStyle" mat-button> Pc</a></li>
         <hr class="lineStyle" />
       </ul>
     </mat-card>

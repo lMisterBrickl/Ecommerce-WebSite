@@ -10,6 +10,8 @@ import { AdminRegisterComponent } from './admin/admin-register/admin-register.co
 import { AdministratorComponent } from './admin/administrator/administrator.component';
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin.guard';
+
 
 
 const routes: Routes = [

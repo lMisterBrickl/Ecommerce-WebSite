@@ -31,14 +31,4 @@ export class AuthService{
         
     }
 
-
-    logiUser(email:string, password:string, username:string){
-        const authData: AuthData = {email: email, password: password, username: username}
-        this.http.post("http://localhost:3000/api/adminLogin", authData)
-        .subscribe(response => {
-            this.token = response
-            const token = this.token.token
-         
-        })
-    }
 }

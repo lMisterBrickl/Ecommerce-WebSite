@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { format } from 'path';
+import { AuthService } from 'src/app/auth.service';
 import { productService } from '../products.service';
 
 @Component({
@@ -19,11 +20,11 @@ export class AdministratorComponent implements OnInit {
   public photo:File
   public quantity:number
   public search :string
+  public isAdmin=1
  
-  constructor(public productService: productService) { }
+  constructor(public productService: productService, private authService:AuthService) { }
 
   ngOnInit(): void {
-
   }
 
     saveFile(event:Event){

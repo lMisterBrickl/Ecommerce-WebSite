@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart-service/cart-service';
-
+import {PostsService} from '../posts.service'
 
 
 
@@ -23,7 +24,7 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   public username:any
   public newUsername:boolean = false
 
-  constructor(public router: Router, private cartService: CartService, private authService: AuthService) {
+  constructor(public router: Router, private cartService: CartService, private authService: AuthService, private postService: PostsService) {
   }
 
 
@@ -53,6 +54,12 @@ export class NavBarComponent implements OnInit,  OnDestroy {
       this.isUserLogin = isUserAuth
     })
 
+   }
+
+   onSearchProduct(form: string){
+      let type = form
+      console.log(type)
+      this.postService.getSpecificProduct(type)
    }
 
 

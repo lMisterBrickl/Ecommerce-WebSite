@@ -59,27 +59,22 @@ router.use("/posts", (req, res, next)=>{
     })  
 })
 
-// router.post("/updateProduct",(req,res,next)=>{
-//     const product = new Product({
-//         title: req.body.title ,
-//         price: req.body.price,
-//         specification: req.body.specification,
-//         photo: "../../src/assets/images/" + originalName + '-' + date + patthPhoto, 
-//         quantity: parseInt(req.body.quantity),
-//         type: req.body.type,
-//     })
+router.get("/specificPosts/:type", (req, res)=>{
 
-//     Product.findByIdAndUpdate(list[1],product,(error, data)=>{
-//         if(error){
-//             console.log(error)
-//         }
-//         else{
-//             console.log(data)
-//         }
-//     })
-
-
-// })
+    Product.find({type: req.params.type}).then(products =>{
+        if(!products){
+            res.status(401).jsson({
+                message:"0 products"
+            })
+        }
+        else{
+            res.status(201).json({
+                message:"succes",
+                posts: products
+            })
+        }
+    })
+})
 
 
 

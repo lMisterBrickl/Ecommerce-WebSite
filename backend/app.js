@@ -79,6 +79,8 @@ app.get('/api/searchProd/:title', (req, res)=>{
 
 
 
+
+
 app.post("/api/updateProduct", upload.single("photo"),(req,res,next)=>{
   let newProduct = {
     title: req.body.title ,

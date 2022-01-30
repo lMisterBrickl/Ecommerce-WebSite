@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Injectable({ providedIn: "root"})
 export class AuthService{
     private token: any
-
+    public LoginUsername : any
     public isAdmin: number
     private authStatusListener = new Subject<boolean>()
     private isAuthenticated = false
@@ -34,7 +34,6 @@ export class AuthService{
         else{
             const authData = {email: email, password: password, username: username}
             this.realAuthdata = authData
-
             this.http.post("http://localhost:3000/api/register", authData)
             .subscribe(response =>{
                 console.log(response)
@@ -46,6 +45,7 @@ export class AuthService{
 
     logiUser(email:string, password: string,username:string){
         const authData = {email: email, password: password, username: username}
+        
         const newUsername = authData.username
         this.http.post<{token: string, expiresIn: number}>("http://localhost:3000/api/login", authData)
          .subscribe(response => {
@@ -62,10 +62,19 @@ export class AuthService{
                 const expireDate = new Date(timeNow.getTime() + (expiresInDuration * 1000))
                 this.saveAuthData(token,expireDate,newUsername,this.isAdmin)
                 this.router.navigate(['/'])
+                this.LoginUsername = response
+                // this.getLoginUser()
                
              }
             
          })
+    }
+
+
+    
+    getLoginUser(){
+        // console.log(this.LoginUsername.username)
+        return this.LoginUsername.username
     }
 
 
@@ -89,6 +98,9 @@ export class AuthService{
 
 
     logout(){
+        this.http.post("http://localhost:3000/api/logout", localStorage.getItem("token")).subscribe(response =>{
+            console.log(response)
+        })
         this.token = null
         this.isAuthenticated = false
         this.authStatusListener.next()

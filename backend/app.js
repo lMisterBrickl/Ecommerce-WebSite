@@ -108,6 +108,9 @@ app.post("/api/updateProduct", upload.single("photo"),(req,res,next)=>{
 })
 
 
+
+
+
 app.post("/api/deleteProduct",(req,res,next)=>{
     Product.deleteOne({_id:this.searchId}).then(res=>{
       if(!res){

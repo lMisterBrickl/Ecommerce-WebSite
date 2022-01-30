@@ -2,7 +2,10 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router()
 const User = require("../models/users")
-const jwt = require("jsonwebtoken")
+const Auth = require("../models/auth")
+const jwt = require("jsonwebtoken");
+const Product = require("../models/products")
+
 
 
 
@@ -75,7 +78,7 @@ router.post('/getRole', (req,res)=>{
 
 router.post("/login", (req, res, next)=>{
   let fetchedUser
-  User.findOne({email: req.body.email}).then(user=>{
+  User.findOne({email: req.body.email, username: req.body.username}).then(user=>{
      if(!user){
        return res.status(401).json({ 
          message: "Auth Fail"
@@ -95,10 +98,17 @@ router.post("/login", (req, res, next)=>{
       "secret_this_should_be_longer",
       {expiresIn: '1h'}
       )
+      const auth = new Auth({
+        username:fetchedUser.username,
+        type: fetchedUser.category,
+        token: token
+      })
+      auth.save()
+
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        category: fetchedUser.category
+        category: fetchedUser.category,
       })
    })
    .catch(err => {
@@ -108,6 +118,70 @@ router.post("/login", (req, res, next)=>{
    })
 })
 
+router.post("/findUser", (req,res)=>{
+  Auth.find().then(result=>{
+    if(!result){
+      res.status(401).json({
+        message:"Cant find"
+      })
+    }
+    res.status(200).json({
+      result: result[0].username
+    })
+  })
+})
+
+
+router.post('/addToCart', (req, res)=>{
+  let productId = req.body[0]._id
+  User.findOne({username: req.body[1].result}).then(oldUser =>{
+    let newCart = []
+    Product.findOne({_id: productId}).then(oldCart =>{
+      newCart.push(req.body[0])
+      if(oldCart.cart != null){
+        newCart.push(oldCart.cart)
+      }
+      
+      console.log("newCart", newCart)
+      let user = new User({
+        username: oldUser.username,
+        password: oldUser.password,
+        email: oldUser.email,
+        category: oldUser.category,
+        cart: newCart
+    })
+  
+    User.findByIdAndUpdate({_id: oldUser._id},user,(error, data)=>{
+      if(error){
+          console.log(error)
+      }
+      else{
+          console.log("Succesful" + data)
+      }
+  })
+    })
+
+    })
+    
+    
+
+})
+
+
+
+router.post("/logout", (req, res)=>{
+
+  Auth.deleteMany({}).then(result=>{
+    if(!result){
+      res.status(400).json({
+        message: "cant find user"
+      })
+    res.status(200).json({
+      message: "succesfull"
+    })
+  }
+})
+})
 
 
 

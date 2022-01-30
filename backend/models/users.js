@@ -6,8 +6,8 @@ const userSchema = mongoose.Schema({
   email: { type: String, require:true, unique:true, lowecase:true},
   password: { type: String, require:true},
   address  : { type: String, require:true},
-  category:{ type:Number, require:true}
-  // cart: {type: Any}
+  category:{ type:Number, require:true},
+  cart: {type: Array}
 })
 
 userSchema.plugin(uniqueValidator)

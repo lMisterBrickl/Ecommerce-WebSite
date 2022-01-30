@@ -25,7 +25,7 @@ export class AuthService{
             this.http.post("http://localhost:3000/api/adminRegister", authData)
             .subscribe(response =>{
                 console.log(response)
-                this.router.navigate(['/admin-login'])
+                this.router.navigate(['/login'])
         })
         }
         

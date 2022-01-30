@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
 import { toInteger } from "@ng-bootstrap/ng-bootstrap/util/util";
 import { BehaviorSubject } from "rxjs";
+import { AuthService } from "../auth.service";
 import {Post} from "../post.model"
+import { HttpClient } from "@angular/common/http";
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +14,9 @@ export class CartService{
 
   public cartItemList :  any = []
   public productList = new BehaviorSubject<any>([])
+  public username: any
 
-  constructor(){}
+  constructor(public authService: AuthService, public http: HttpClient){}
 
   getProduct(){
     return this.productList.asObservable()
@@ -23,8 +27,17 @@ export class CartService{
     this.productList.next(product)
   }
 
-  addtoCart(product:Post){
 
+  getUsername(product:Post){
+    this.http.post("http://localhost:3000/api/findUser", "hello").subscribe(response =>{
+      this.http.post("http://localhost:3000/api/addToCart", [product, response]).subscribe(response =>{
+      console.log(response)
+    })
+    })
+  }
+
+  addtoCart(product:Post){
+    this.getUsername(product) 
     if (this.cartItemList.includes(product)){
       this.cartItemList.map((a:Post,index:any)=>{
         if(a.id === product.id){
@@ -34,11 +47,11 @@ export class CartService{
       })
     }
     else{
-      console.log(product)
+      // console.log(product)
       this.cartItemList.push(product)
     }
     this.productList.next(this.cartItemList)
-    console.log(this.productList)
+    // console.log(this.productList)
   }
 
 

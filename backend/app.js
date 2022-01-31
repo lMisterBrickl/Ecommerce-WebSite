@@ -83,6 +83,7 @@ app.get('/api/searchProd/:title', (req, res)=>{
 
 app.post("/api/updateProduct", upload.single("photo"),(req,res,next)=>{
   let newProduct = {
+
     title: req.body.title ,
     price: req.body.price,
     specification: req.body.specification,
@@ -94,9 +95,7 @@ app.post("/api/updateProduct", upload.single("photo"),(req,res,next)=>{
   Product.findOne({_id:this.searchId}).then(product =>{
     oldProduct = product
   })
-  console.log(this.searchId)
-  console.log(oldProduct)
-  console.log("new Product: " + newProduct)
+  
   Product.findByIdAndUpdate({_id:this.searchId},newProduct,(error, data)=>{
       if(error){
           console.log(error)

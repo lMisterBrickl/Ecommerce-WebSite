@@ -5,6 +5,7 @@ const User = require("../models/users")
 const Auth = require("../models/auth")
 const jwt = require("jsonwebtoken");
 const Product = require("../models/products")
+const ObjectId = require('mongo-objectid');
 
 
 
@@ -135,15 +136,11 @@ router.post("/findUser", (req,res)=>{
 router.post('/addToCart', (req, res)=>{
   let productId = req.body[0]._id
   User.findOne({username: req.body[1].result}).then(oldUser =>{
-    let newCart = []
-    Product.findOne({_id: productId}).then(oldCart =>{
-      newCart.push(req.body[0])
-      if(oldCart.cart != null){
-        newCart.push(oldCart.cart)
-      }
-      
-      console.log("newCart", newCart)
+    let newCart = oldUser.cart
+    Product.findOne({_id: productId}).then(product =>{
+      newCart.push(product._id)
       let user = new User({
+        _id: oldUser._id,
         username: oldUser.username,
         password: oldUser.password,
         email: oldUser.email,
@@ -162,11 +159,32 @@ router.post('/addToCart', (req, res)=>{
     })
 
     })
-    
-    
-
 })
 
+
+router.get('/getCart/:response', (req, res)=>{
+  User.findOne({username: req.params.response}).then(data =>{
+    res.status(200).json({
+      result: data.cart
+    })
+  })
+})
+
+
+router.get('/getCartOBJ/:cartList', (req, res)=>{
+  
+  let ids = req.params.cartList.split(",")
+  let newCart = returnProducts(ids)
+  async function returnProducts(ids){
+    let cart = []
+    for(const i of ids){
+      const product = await Product.findOne({_id: new ObjectId(i)})
+      cart.push(product)
+    }
+    return cart
+  }
+  console.log(newCart)
+})
 
 
 router.post("/logout", (req, res)=>{

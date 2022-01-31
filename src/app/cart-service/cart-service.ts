@@ -15,11 +15,22 @@ export class CartService{
   public cartItemList :  any = []
   public productList = new BehaviorSubject<any>([])
   public username: any
+  public cart:any
+
 
   constructor(public authService: AuthService, public http: HttpClient){}
 
   getProduct(){
-    return this.productList.asObservable()
+    this.http.post("http://localhost:3000/api/findUser", "hello").subscribe(response =>{
+      this.username = response
+      this.http.get(`http://localhost:3000/api/getCart/${this.username.result}`).subscribe(response =>{
+        this.cart = response
+         this.http.get(`http://localhost:3000/api/getCartOBJ/${this.cart.result}`).subscribe(cartList =>{
+            console.log(cartList)
+         })
+      })
+    })
+    return this.productList.asObservable()  
   }
 
   setProduct(product:any){
@@ -28,10 +39,10 @@ export class CartService{
   }
 
 
-  getUsername(product:Post){
+  getUsername(product:any){
     this.http.post("http://localhost:3000/api/findUser", "hello").subscribe(response =>{
       this.http.post("http://localhost:3000/api/addToCart", [product, response]).subscribe(response =>{
-      console.log(response)
+      
     })
     })
   }

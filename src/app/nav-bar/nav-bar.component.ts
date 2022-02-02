@@ -23,6 +23,7 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   public isUserLogin = false
   public username:any
   public newUsername:boolean = false
+  public product : any =[]
 
   constructor(public router: Router, private cartService: CartService, private authService: AuthService, private postService: PostsService) {
   }
@@ -47,7 +48,10 @@ export class NavBarComponent implements OnInit,  OnDestroy {
     }
 
     this.cartService.getProduct().subscribe(res=>{
-      this.numItems = this.cartService.gettotalProducts()
+      this.product = res.result
+      console.log(res)
+      this.numItems = this.product.length()
+      
     })
 
     this.authListenerSubs = this.authService.getAuthListener().subscribe(isUserAuth=>{

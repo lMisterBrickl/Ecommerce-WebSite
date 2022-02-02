@@ -133,12 +133,37 @@ router.post("/findUser", (req,res)=>{
 })
 
 
+router.post('/destroyCart', (req,res)=>{
+  console.log(req.body.result
+    )
+  User.findOne({username:req.body.result}).then(oldUser => {
+    let user = new User({
+      _id: oldUser._id,
+      username: oldUser.username,
+      password: oldUser.password,
+      email: oldUser.email,
+      category: oldUser.category,
+      cart: []
+  })
+  console.log(user)
+  User.findByIdAndUpdate({_id: user._id}, user, (error, data)=>{
+    if(error){
+        console.log(error)
+    }
+    else{
+        console.log("Succesful" + data)
+    }
+    })
+  })
+})
+
+
 router.post('/addToCart', (req, res)=>{
   let productId = req.body[0]._id
   User.findOne({username: req.body[1].result}).then(oldUser =>{
     let newCart = oldUser.cart
     Product.findOne({_id: productId}).then(product =>{
-      newCart.push(product._id)
+      newCart.push(product)
       let user = new User({
         _id: oldUser._id,
         username: oldUser.username,
@@ -171,19 +196,13 @@ router.get('/getCart/:response', (req, res)=>{
 })
 
 
-router.get('/getCartOBJ/:cartList', (req, res)=>{
-  
-  let ids = req.params.cartList.split(",")
-  let newCart = returnProducts(ids)
-  async function returnProducts(ids){
-    let cart = []
-    for(const i of ids){
-      const product = await Product.findOne({_id: new ObjectId(i)})
-      cart.push(product)
-    }
-    return cart
-  }
-  console.log(newCart)
+
+router.post("/getNumberOfProducts", (req, res) =>{
+  User.findOne({username: req.body.result}).then(data =>{
+      res.status(200).json({
+        result: data.cart
+      })
+  })
 })
 
 

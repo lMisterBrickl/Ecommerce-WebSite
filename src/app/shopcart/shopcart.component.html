@@ -13,7 +13,6 @@
                           <th>Description</th>
                           <th>Price</th>
                           <th>Quantity</th>
-                          <th>Total</th>
                           <th>Action</th>
                       </tr>
                   </thead>
@@ -25,7 +24,6 @@
                           <td style="width: 25%;">{{item.specification}}</td>
                           <th style="width: 12%;">{{item.price}}</th>
                           <td style="width: 12%;">{{item.quantity}}</td>
-                          <td style="width: 12%;">{{item.total}}</td>
                           <td>
                             <button mat-icon-button (click)="deleteItem(item)">
                               <mat-icon class="btn-container">delete_forever</mat-icon>

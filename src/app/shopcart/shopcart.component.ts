@@ -20,7 +20,7 @@ export class ShopcartComponent implements OnInit {
 
   ngOnInit(): void {
       this.cartService.getProduct().subscribe(res=>{
-        this.product = res
+        this.product = res.result
         this.grandTotal = this.cartService.getTotalPrice()
       })
   }

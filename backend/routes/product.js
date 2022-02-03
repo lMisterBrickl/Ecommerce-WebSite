@@ -13,7 +13,7 @@ const posts = [
     price: "1500",
     oldprice: "1501",
     text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!",
-    photo: "../../assets/images/tvpng.png",
+    photo: "../../assets/images/tvscump.jpg",
     quantity: 1,
   },
   {

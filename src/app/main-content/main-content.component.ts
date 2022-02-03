@@ -67,7 +67,7 @@ export class MainContentComponent implements OnInit {
     }
     setTimeout(() => {
       this.carouselanimation()
-    }, 2000);
+    }, 6000);
     
   }
 }

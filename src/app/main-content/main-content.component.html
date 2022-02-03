@@ -24,21 +24,28 @@
     </ng-container>
 </div>
 </a>
+
  <div class="prod-grid">
-  <div *ngFor="let item of posts" class="content">
-    <a routerLink="product/{{item.id}}" class="img-action">
-    <img src={{item.photo}} />
-  </a>
-    <div class="text">
-      <h1>{{item.title}}</h1>
-      <p class="description">{{item.text}}</p>
-      <a class="more" routerLink="product/{{item.id}}">...Mai mult</a>
-      <div class="price">
-        <p class="old">{{item.oldprice}}</p>
-        <h1 class="new">{{item.price}} Lei</h1>
-      <a class="add" (click)=addToCart(item)>Adauga in cos</a>
+    <div *ngFor="let item of posts" class="content">
+        <a routerLink="product/{{item.id}}" class="img-action">
+            <img src={{item.photo}} />
+          </a>
+      <div class="text">
+        <a class="title-text" routerLink="product/{{item.id}}">
+          <h1 class="title">{{item.title}}</h1>
+          <p class="description">{{item.text}}</p>
+        </a>
+      
+      <div class="price"> 
+        <div class="price-text">
+          <p class="old">{{item.oldprice}}</p> 
+          <h1  class="new">{{item.price}} Lei</h1>
+        </div>       
+        <a  class="add" (click)=addToCart(item)>Adauga in cos</a> 
       </div>
-      </div>
+      
+    </div>
+
   </div>
 </div>
 

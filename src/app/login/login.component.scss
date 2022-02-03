@@ -1,0 +1,23 @@
+.container {
+  padding: 5rem 0;
+}
+.card {
+  margin: auto;
+  max-width: 60%;
+  .content {
+    display: flex;
+    flex-direction: column;
+    .buttons {
+      display: flex;
+      flex-direction: column;
+    }
+    .login {
+      margin-bottom: 1em;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .card {
+    max-width: 90%;
+  }
+}

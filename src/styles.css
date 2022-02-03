@@ -1,21 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --clr-primary: #6e6e6e;
-  --clr-secondary: blanchedalmond;
-  --clr-accent: #b6a7b6;
-  --clr-warn: #f9f871;
-  --clr-danger: #ff525c;
+  --clr-toolbar: #232229;
+  --clr-primary: #303030;
+  --clr-secondary: #c1c25e;
+  --clr-actions: #00c6cf;
+  --clr-actions-hover: #008b69;
+  --clr-price: #008b69;
+  --clr-danger: #e91e63;
+  --clr-text: blanchedalmond;
 }
 html,
 body {
   height: 100%;
-  background-color: #2a272a;
+  background-color: #474554;
   font-size: 100%;
+  font-family: "Roboto Mono", monospace;
 }
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto Mono", monospace;
 }
 * {
   user-select: none;

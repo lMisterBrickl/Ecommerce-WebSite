@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:"login",component: LoginComponent},
   {path:"admin-login", component: AdminLoginComponent},
   {path:"admin-register", component:AdminRegisterComponent},
-  {path:"management",component:AdministratorComponent},
+  {path:"management",component:AdministratorComponent, canActivate:[AdminGuard]},
   {path:"cart", component:ShopcartComponent, canActivate:[AuthGuard]}
 
 ];

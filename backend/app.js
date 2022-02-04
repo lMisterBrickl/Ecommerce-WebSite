@@ -111,8 +111,8 @@ app.post("/api/updateProduct", upload.single("photo"),(req,res,next)=>{
 
 
 app.post("/api/deleteProduct",(req,res,next)=>{
-    Product.deleteOne({_id:this.searchId}).then(res=>{
-      if(!res){
+    Product.deleteOne({_id:this.searchId}).then(result=>{
+      if(!result){
         res.status(401).json({
           message:"cant delete item"
         })

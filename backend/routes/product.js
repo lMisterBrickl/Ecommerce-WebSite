@@ -11,7 +11,7 @@ let originalName = ""
 let patthPhoto = ""
 
 const storage = multer.diskStorage({
-    destination:"/licenta/Licenta/src/assets/images/",
+    destination:"E:/licenta/Licenta/src/assets/images/",
     filename: function(req,photo, cb){
         originalName = photo.originalname
         patthPhoto = path.extname(photo.originalname)
@@ -27,7 +27,7 @@ router.post("/addProduct",upload.single("photo"),(req, res, next) =>{
         title: req.body.title ,
         price: req.body.price,
         specification: req.body.specification,
-        photo: "../../src/assets/images/" + originalName + '-' + date + patthPhoto, 
+        photo: "../../assets/images/" + originalName + '-' + date + patthPhoto, 
         quantity: parseInt(req.body.quantity),
         type: req.body.type,
         
@@ -63,7 +63,7 @@ router.get("/specificPosts/:type", (req, res)=>{
 
     Product.find({type: req.params.type}).then(products =>{
         if(!products){
-            res.status(401).jsson({
+            res.status(401).json({
                 message:"0 products"
             })
         }
@@ -75,6 +75,9 @@ router.get("/specificPosts/:type", (req, res)=>{
         }
     })
 })
+
+
+
 
 
 

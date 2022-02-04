@@ -4,6 +4,7 @@ import { PostsService } from '../posts.service';
 import { Post } from '../post.model'
 import { CartService } from '../cart-service/cart-service';
 
+
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
@@ -20,6 +21,7 @@ export class MainContentComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getPost()
     this.postSub = this.postService.getPostUpdateListener().subscribe((posts:Post[]) => {
+      console.log(posts)
       this.posts = posts
       this.posts.forEach((a:any)=>{
         Object.assign(a,{total:a.price})

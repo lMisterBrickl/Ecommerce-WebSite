@@ -6,6 +6,7 @@ const Auth = require("../models/auth")
 const jwt = require("jsonwebtoken");
 const Product = require("../models/products")
 const ObjectId = require('mongo-objectid');
+const { data } = require("jquery");
 
 
 
@@ -62,16 +63,18 @@ router.post("/adminRegister", (req, res, next) =>{
 
 router.post('/getRole', (req,res)=>{
 
-  User.findOne({username: req.body.username}).then(user=>{
-    console.log(user)
-    if(!user){
-      return res.status(404).json({
-        message:"404"
+  Auth.find().then(result=>{
+    if(result.length < 1){
+      res.status(401).json({
+        message:"Cant find"
       })
     }
-    return res.status(200).json({
-        role: user.category
-    })
+    else{
+      res.status(200).json({
+        role: result[0].type
+      })
+    }
+    
   })
 })
 
@@ -121,14 +124,18 @@ router.post("/login", (req, res, next)=>{
 
 router.post("/findUser", (req,res)=>{
   Auth.find().then(result=>{
-    if(!result){
+    if(result.length < 1){
+      
       res.status(401).json({
         message:"Cant find"
       })
     }
-    res.status(200).json({
-      result: result[0].username
-    })
+    else{
+      res.status(200).json({
+        result: result[0].username
+      })
+    }
+    
   })
 })
 
@@ -203,6 +210,57 @@ router.post("/getNumberOfProducts", (req, res) =>{
         result: data.cart
       })
   })
+})
+
+
+// FormSchema.updateOne({formName: name}, {$pull: {fields: {fieldName: fieldName}}}).exec();
+
+router.post("/removeProduct", (req,res) =>{
+  // console.log(req.body[1].result)
+
+  User.findOne({username: req.body[1].result}).then(data =>{
+    let ct = 0
+    let newCart = []
+    // console.log(ata.cart)
+    for(let i of data.cart){
+      if(i.title != req.body[0].title){
+        console.log(i)
+        newCart.push(i)
+      }
+      else{
+        if(i.title == req.body[0].title && ct==1){
+          newCart.push(i)
+        }
+        else{ ct++}
+      }
+    }
+    // console.log(newCart)
+    let newData ={
+      _id: data._id,
+      username: data.username,
+      password: data.password,
+      email: data.email,
+      category: data.category,
+      cart: newCart
+      
+    }
+    User.findByIdAndUpdate({_id: data._id}, newData,(error, data)=>{
+      if(error){
+          console.log(error)
+      }
+      else{
+          console.log("Succesful" + data)
+      }
+    })
+  })
+  
+  // User.findOne({username: req.body[1].result}).then(data =>{
+    
+  //   data.cart.pull(req.body[0].title)
+  //   // console.log( new ObjectId( req.body[0]._id))
+  //   // console.log(data.cart)
+  //   return data.save().then(data => res.send(data))
+  // })
 })
 
 

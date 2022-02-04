@@ -21,11 +21,12 @@ export class CartService{
 
   constructor(public authService: AuthService, public http: HttpClient, private router: Router){}
 
-  getProduct(){
+  public getProduct(){
     this.http.post("http://localhost:3000/api/findUser", "hello").subscribe(response =>{
       this.username = response
       this.http.get(`http://localhost:3000/api/getCart/${this.username.result}`).subscribe(response =>{
         this.productList.next(response)
+        
         // console.log(this.productList)
       })
     })
@@ -48,17 +49,24 @@ export class CartService{
 
 
   removeCartItem(product: any){
-    this.cartItemList.map((a:any, index:any)=>{
-      if(product.id === a.id){
-        if(product.quantity > 1){
-          this.cartItemList[index].quantity -= 1
-          this.cartItemList[index].total -= parseInt(this.cartItemList[index].price)
-        }
-        else{
-          this.cartItemList.splice(index,1)
-        }
-      }
+    console.log(product)
+    this.http.post("http://localhost:3000/api/findUser", "hello").subscribe(response =>{
+      this.http.post("http://localhost:3000/api/removeProduct", [product, response]).subscribe(res =>{
+        console.log(res)
+      })
     })
+
+    // this.cartItemList.map((a:any, index:any)=>{
+    //   if(product.id === a.id){
+    //     if(product.quantity > 1){
+    //       this.cartItemList[index].quantity -= 1
+    //       this.cartItemList[index].total -= parseInt(this.cartItemList[index].price)
+    //     }
+    //     else{
+    //       this.cartItemList.splice(index,1)
+    //     }
+    //   }
+    // })
 
   }
 
@@ -71,8 +79,13 @@ export class CartService{
    return grandTotal
  }
 
-//  gettotalProducts(){
-//     return 
+//  gettotalProducts(cart:any){
+//     // console.log(typeof cart)
+//     // console.log(cart)
+//     this.productList.next(cart.result)
+
+//     return this.productList 
+//     // return cart.result.length
 //  }
 
 

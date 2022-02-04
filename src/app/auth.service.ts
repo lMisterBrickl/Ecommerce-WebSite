@@ -10,7 +10,9 @@ export class AuthService{
     public LoginUsername : any
     public isAdmin: number
     private authStatusListener = new Subject<boolean>()
+    private role = new Subject<Number>()
     private isAuthenticated = false
+    private category:any
     private realAuthdata:any
     private tokenTimer: NodeJS.Timer; 
     constructor(private http: HttpClient, private router: Router){}
@@ -70,14 +72,18 @@ export class AuthService{
          })
     }
 
+    getrole(){
+        this.http.post("http://localhost:3000/api/getRole", '').subscribe(response =>{
+                this.category = response
+                this.role.next(this.category.role)
+               
+            })
 
-    
-    getLoginUser(){
-        // console.log(this.LoginUsername.username)
-        return this.LoginUsername.username
     }
-
-
+    getRoleUpdateListener(){
+        return this.role.asObservable()
+      }
+    
  
 
     remainAuth(){
@@ -139,9 +145,7 @@ export class AuthService{
         if(!token || !expireDatee){
             return undefined
         }
-        return{
-            username: username
-        }
+        return username
     }
 
 

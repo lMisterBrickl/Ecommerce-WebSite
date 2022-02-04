@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
+import { Console } from 'console';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart-service/cart-service';
@@ -19,7 +20,7 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   public hideFilterBar = true;
   public hideGrey = true;
   private authListenerSubs: Subscription = new Subscription;
-  public numItems : number = 0
+  public numItems : any = 0
   public isUserLogin = false
   public username:any
   public newUsername:boolean = false
@@ -48,9 +49,12 @@ export class NavBarComponent implements OnInit,  OnDestroy {
     }
 
     this.cartService.getProduct().subscribe(res=>{
-      this.product = res.result
       console.log(res)
-      this.numItems = this.product.length()
+      for(let i of Object.entries(res)){
+        this.product = res.result
+      }
+      this.numItems = this.product.length
+      console.log(this.numItems);
       
     })
 
@@ -91,7 +95,9 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   }
 
   onLogOut(){
+    
     this.authService.logout()
+    this.username = this.authService.getUsername()
   }
 
   ngOnDestroy(): void {

@@ -21,7 +21,7 @@ export class PostsService{
   getSpecificProduct(type:string){
     this.http.get(`http://localhost:3000/api/specificPosts/${type}`).subscribe((response) =>{
       this.posts = response
-      console.log(this.posts.posts)
+      // console.log(this.posts.posts)
       this.postsUpdated.next(this.posts.posts);
     })
   }

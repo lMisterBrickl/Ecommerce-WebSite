@@ -40,6 +40,7 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   public toggle=false
   public username:any
   public newUsername:boolean = false
+  public search:string
 
 
   constructor(public router: Router, private cartService: CartService, private authService: AuthService, private postService:PostsService) {
@@ -72,6 +73,11 @@ export class NavBarComponent implements OnInit,  OnDestroy {
 
    }
   
+
+  onSearch(){
+    this.postService.getOnSearch(this.search)
+  }
+
   onSearchProduct(form: string){
     let type = form
     console.log(type)

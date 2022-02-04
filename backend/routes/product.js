@@ -76,6 +76,23 @@ router.get("/specificPosts/:type", (req, res)=>{
     })
 })
 
+router.get("/search/:search",(req, res)=>{
+console.log(req.params.search)
+Product.find({title:{$regex:req.params.search}}).then(result=>{
+    console.log(result) 
+    if(result.length < 1){
+      res.status(404).json({
+        message:"0 products"
+    }) 
+  }else{
+    res.status(201).json({
+        message:"succes",
+        posts: result
+    })
+    }
+  })
+})
+
 
 
 

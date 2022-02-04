@@ -10,8 +10,8 @@
       <span><a  class="logo" routerLink="/">Licenta</a></span>
     </div>
     <div  class="Search">
-      <input type="text" placeholder="Caută..." onfocus="this.placeholder=''" onblur="this.placeholder='Cauta...'">
-      <div><a ><mat-icon>search</mat-icon></a></div>
+      <input [(ngModel)]="search"  type="text" placeholder="Caută..." onfocus="this.placeholder=''" onblur="this.placeholder='Cauta...'">
+      <div><a (click)="onSearch()"><mat-icon>search</mat-icon></a></div>
     </div>
     <div class="actions">
       <div *ngIf="this.isUserLogin" ><a routerLink="" class="signin">Buna {{username}}</a></div>
@@ -22,49 +22,8 @@
     </div>
     </mat-toolbar>  
     </div>
-<!--<div *ngIf="(router.url!=='/register') && (router.url!=='/login') && (router.url!=='/admin-login') && (router.url!=='/admin-register') && (router.url!=='/cart') && (router.url!=='/management')" > 
-  <mat-toolbar  class="navbar-smaller">
-    <span><a  class="licenta">Licenta</a></span>
 
-    <div class="display-grid">
-      <input type="search" class="inputStyle" />
-      <a class="icon-color"><i class="material-icons">search</i></a>
-    </div>
-    <div class="cartItmes">
-    <a
-      (mouseover)="mouseHover = true"
-      (click)="mouseHover = true"
-      (mouseleave)="onOut()"
-      class="iconPerson"
-      ><i class="material-icons">person_outline</i></a
-    >
-    <p *ngIf="newUsername " style="font: size 10px; margin-top: 5px; margin-right: 5px;">{{username.username}}</p>
-  </div>
-    <div class="cartItmes">
-    <div style="font: size 10px; margin-top: 5px; margin-right: 5px;">{{numItems}}</div>
-    <a class="icon-color" routerLink="/cart"><i class="material-icons">shopping_cart</i></a>
-    </div>
-  </mat-toolbar>
-  </div>-->
- <!-- <mat-card
-    (mouseleave)="mouseHover = false"
-    (mouseover)="onIn()"
-    *ngIf="mouseHover"
-    class="dropMenu">
-    <div *ngIf="!this.isUserLogin">
-    <a routerLink="/register" class="buttons"
-      ><button class="costumize-button">Register</button></a
-    >
-    <a routerLink="/login" class="buttons"
-      ><button class="costumize-button">Login</button></a
-    >
-  </div>
 
-    <a *ngIf="this.isUserLogin" class="buttons"
-    ><button (click)="onLogOut()"   class="costumize-button">Logout</button></a
-  >
-    
-  </mat-card>-->
  <div>
   <div @sideBar class="sideBar" *ngIf="toggle">
     <div class="login">

@@ -50,5 +50,12 @@ export class PostsService{
     })
   }
 
+  getOnSearch(search:string){
+    this.http.get(`http://localhost:3000/api/search/${search}`).subscribe(response =>{
+      this.posts = response
+      this.postsUpdated.next(this.posts.posts);
+    })
+  }
+
 }
 

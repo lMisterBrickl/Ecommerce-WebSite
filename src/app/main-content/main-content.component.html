@@ -16,8 +16,8 @@
         <img src={{item.photo}} @image>
         <div class="text">
           <h1 class="title" @title>{{item.title}}</h1>
-          <p class="description" @text>{{item.text}}</p>
-          <p class="old" @text>{{item.oldprice}}</p>
+          <p class="description" @text>{{item.specification}}</p>
+          
           <h1 class="price" @text >{{item.price}}</h1>         
         </div>
        </div>
@@ -33,12 +33,11 @@
       <div class="text">
         <a class="title-text" routerLink="product/{{item.id}}">
           <h1 class="title">{{item.title}}</h1>
-          <p class="description">{{item.text}}</p>
+          <p class="description">{{item.specification}}</p>
         </a>
       
       <div class="price"> 
         <div class="price-text">
-          <p class="old">{{item.oldprice}}</p> 
           <h1  class="new">{{item.price}} Lei</h1>
         </div>       
         <a  class="add" (click)=addToCart(item)>Adauga in cos</a> 

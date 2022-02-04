@@ -14,7 +14,8 @@
       <div><a ><mat-icon>search</mat-icon></a></div>
     </div>
     <div class="actions">
-      <div *ngIf="this.isUserLogin" ><a routerLink="" class="signin">{{username.username}}</a></div>
+      <div *ngIf="this.isUserLogin" ><a routerLink="" class="signin">Buna {{username}}</a></div>
+      <div *ngIf="this.isUserLogin"><a routerLink="" class="signin" (click)="onLogOut()">Logout</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/login" class="signin" (click)="toggle=false">Sign in</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/register"class="signin" (click)="toggle=false">Register</a></div>
       <div><a routerLink="/cart"><mat-icon class="cart" matBadge={{numItems}} matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a></div>
@@ -67,22 +68,21 @@
  <div>
   <div @sideBar class="sideBar" *ngIf="toggle">
     <div class="login">
-      <div *ngIf="this.isUserLogin" ><a routerLink="" class="sidebarsignin" (click)="toggle=false">{{username.username}}</a></div>
+      <div *ngIf="this.isUserLogin" ><a routerLink="" class="sidebarsignin" (click)="toggle=false">{{username}}</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/login" class="sidebarsignin" (click)="toggle=false">Sign in</a></div>
       <div *ngIf="!this.isUserLogin"><a routerLink="/register"class="sidebarsignin" (click)="toggle=false">Register</a></div>
     </div>
 
-      <ul>
-        <li><a routerLink="/stuffs" (click)="toggle=false" >Televizoare</a></li>
-        <hr/>
-        <li><a routerLink="/stuffs" (click)="toggle=false" > Telefoane </a></li>
-        <hr/>
-        <li><a routerLink="/stuffs" (click)="toggle=false" > Aparate Foto</a></li>
-        <hr/>
-        <li><a routerLink="/stuffs" (click)="toggle=false"> Laptopuri</a></li>
-        <hr/>
-        <li><a routerLink="/stuffs" (click)="toggle=false"> Pc/Componente</a></li>
-        <hr/>
+      <ul (click)="toggle=false">
+        <li><a (click)="onSearchProduct('Televizoare')"  class="categoryStyle" ngModel mat-button>Televizoare</a></li>
+        <hr class="lineStyle" />
+        <li><a (click)="onSearchProduct('Telefoane')" class="categoryStyle" mat-button> Telefoane </a></li>
+        <hr class="lineStyle" />
+        <li><a (click)="onSearchProduct('Aparate_Foto')" class="categoryStyle" mat-button> Aparate Foto</a></li>
+        <hr class="lineStyle" />
+        <li><a (click)="onSearchProduct('Laptopuri')" class="categoryStyle" mat-button> Laptopuri</a></li>
+        <hr class="lineStyle" />
+        <li><a (click)="onSearchProduct('Pc')" class="categoryStyle" mat-button> Pc</a></li>
       </ul>
         <span><a  class="sidebarlogo" routerLink="/">Licenta</a></span>
   </div> 

@@ -56,6 +56,7 @@ export class MainContentComponent implements OnInit {
 
   addToCart(item:Post){
     this.cartService.addtoCart(item)
+    this.cartService.getProduct()
   }
   carouselanimation(){
     if(this.i<this.posts.length-1){

@@ -1,7 +1,6 @@
-<div class="container">
-<mat-card class="card">
-  <h1 >Login</h1>
-  <form (submit)= "onLogin(regForm)" #regForm = "ngForm" class="content">
+<mat-card class="matPosition">
+  <h1 style="color: rgb(109, 108, 108);">Login</h1>
+  <form (submit)= "onLogin(regForm)" #regForm = "ngForm">
   <mat-form-field class="loginPosition">
     <input matInput type="email" type="text" name="email" email ngModel required placeholder="Email" />
   </mat-form-field>
@@ -10,13 +9,12 @@
   </mat-form-field> 
   <mat-form-field class="loginPosition">
     <input matInput type="password" name="password" ngModel required placeholder="Password" #passwordInput/>
-    <mat-error *ngIf="passwordInput">Try another password</mat-error>
+    <mat-error *ngIf="passwordInput">Try anouther password</mat-error>
   </mat-form-field>
-  <div *ngIf='!isLoading' class="buttons">
-    <button mat-raised-button color="primary"  class="login"><div class="button-text-aling">Login</div></button>
+  <div *ngIf='!isLoading'>
+    <button mat-flat-button  class="loginPosition buttons-color"><div class="button-text-aling">Login</div></button>
     <a href="" class="forgot">Forgot username/password</a>
 </div>
   <mat-spinner *ngIf='isLoading'></mat-spinner>
   </form>
 </mat-card>
-</div>

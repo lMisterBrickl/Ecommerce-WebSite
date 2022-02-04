@@ -9,6 +9,7 @@ import { AdministratorComponent } from './admin/administrator/administrator.comp
 import { ShopcartComponent } from './shopcart/shopcart.component';
 import { AuthGuard } from './auth.guard';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { AdminGuard } from './admin.guard';
 
 
 const routes: Routes = [
@@ -18,8 +19,8 @@ const routes: Routes = [
   {path:"login",component: LoginComponent},
   {path:"admin-login", component: AdminLoginComponent},
   {path:"admin-register", component:AdminRegisterComponent},
-  {path:"management",component:AdministratorComponent},
-  {path:"cart", component:ShopcartComponent},
+  {path:"management",component:AdministratorComponent,canActivate:[AdminGuard]},
+  {path:"cart", component:ShopcartComponent,canActivate:[AuthGuard]},
   {path:"product/:id", component:ProductPageComponent }
 
 ];

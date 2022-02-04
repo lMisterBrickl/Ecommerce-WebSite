@@ -1,73 +1,133 @@
 const express = require("express");
-
 const User = require("../backend/models/users").default;
 const mongoose = require("mongoose");
-const cors = require("cors");
+const cors = require('cors')
 const userRoutes = require("./routes/user");
-const productRoutes = require("./routes/product");
+const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser")
+const productRoutes = require("./routes/product")
+const Product = require("./models/products")
+const ObjectId = require('mongo-objectid');
+const morgan = require('morgan');
+const multer  = require('multer');
+
 
 app = express();
 
-mongoose.connect("mongodb://localhost:27017/Licenta", function (err) {
-  if (err) {
-    console.log("Failed to connect" + err);
-  } else {
-    console.log("You are connected to db");
+let searchId = new ObjectId('')
+
+
+mongoose.connect('mongodb://localhost:27017/Licenta', function(err){
+  if(err){
+    console.log("Failed to connect" + err)
+  }else{
+    console.log("You are connected to db")
   }
+})
+
+const date = Date.now()
+let originalName = ""
+let patthPhoto = ""
+
+const storage = multer.diskStorage({
+    destination:"/licenta/Licenta/src/assets/images/",
+    filename: function(req,photo, cb){
+        originalName = photo.originalname
+        patthPhoto = path.extname(photo.originalname)
+        cb(null, photo.originalname + '-' + date +
+        path.extname(photo.originalname))
+    }
+})
+
+const upload = multer({storage:storage})
+
+
+  app.use(express.json());
+  app.use(express.urlencoded({extended:true}))
+  app.use(cors())
+
+app.get('/api/product/:id', function(req, res,next) {
+  const id = new ObjectId(req.params.id)
+  Product.findOne({_id:id}).then(product => {
+      if(!product){
+          res.status(401).json({
+              message: "Product doesn't exists"
+          })
+      }
+      res.status(200).json({
+          product
+      })
+  })
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
-// app.use("/api/posts", (req, res, next) => {
-//   const posts = [
-//     {
-//       id: "1",
-//       title: "Lorem ipsum dolor sit amet",
-//       price: "1500",
-//       oldprice: "1501",
-//       text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!",
-//       photo: "../../assets/images/tvpng.png",
-//       quantity: 1,
-//     },
-//     {
-//       id: "2",
-//       title: "Lorem ipsum dolor sit amet",
-//       price: "3000",
-//       oldprice: "",
-//       text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!",
-//       photo: "../../assets/images/iphone12.jpg",
-//       quantity: 1,
-//     },
-//     {
-//       id: "3",
-//       title: "Lorem ipsum dolor sit amet",
-//       price: "3500",
-//       oldprice: "",
-//       text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!",
-//       photo: "../../assets/images/pc dark.jpeg",
-//       quantity: 1,
-//     },
-//     {
-//       id: "4",
-//       title: "Lorem ipsum dolor sit amet",
-//       price: "3500",
-//       oldprice: "",
-//       text: "Lorem, ipsum dolor sit amet conseLorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!Lorem, ipsum dolor sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!ctetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi!Lorem, ipsum dolor  sit amet consectetur adipisicing elit. At laborum vitae sapiente. Quaerat praesentium, nam nesciunt adipisci fugiat laborum ducimus dolore quibusdam voluptas quidem! Quos sint magni saepe inventore excepturi! text-overflow: ellipsis; text-overflow: ellipsis;",
-//       photo: "../../assets/images/pc dark2.jpeg",
-//       quantity: 1,
-//     },
-//   ];
-//   res.status(200).json({
-//     message: "Posts fetched succesfully",
-//     posts: posts,
-//   });
-//   next();
-// });
+app.get('/api/searchProd/:title', (req, res)=>{
+  
+   Product.findOne({title:req.params.title}).then(product =>{
+     if(!product){
+         res.status(401).json({
+             message: "Product doesn't exists"
+         })
+     }
+     this.searchId = product._id
+     res.status(200).json({
+         message: "Product was found succesfully",
+         posts:product
+     })
+ })
+})
 
-app.use("/api", userRoutes);
 
-app.use("/api", productRoutes);
+
+
+
+app.post("/api/updateProduct", upload.single("photo"),(req,res,next)=>{
+  let newProduct = {
+
+    title: req.body.title ,
+    price: req.body.price,
+    specification: req.body.specification,
+    photo: "../../src/assets/images/" + originalName + '-' + date + patthPhoto, 
+    quantity: parseInt(req.body.quantity),
+    type: req.body.type,
+  }
+  let oldProduct
+  Product.findOne({_id:this.searchId}).then(product =>{
+    oldProduct = product
+  })
+  
+  Product.findByIdAndUpdate({_id:this.searchId},newProduct,(error, data)=>{
+      if(error){
+          console.log(error)
+      }
+      else{
+          console.log(data)
+      }
+  })
+})
+
+
+
+
+
+app.post("/api/deleteProduct",(req,res,next)=>{
+    Product.deleteOne({_id:this.searchId}).then(result=>{
+      if(!result){
+        res.status(401).json({
+          message:"cant delete item"
+        })
+      }
+      res.status(200).json({
+        message:"Item was deleted succesfully"
+      })
+    })
+})
+
+
+app.use(morgan('dev'));
+
+ app.use("/api", productRoutes);
+ app.use("/api", userRoutes); 
 
 module.exports = app;
+

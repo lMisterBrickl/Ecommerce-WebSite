@@ -7,7 +7,7 @@ import { Image } from "angular-responsive-carousel"
 
 @Injectable({providedIn: 'root'})
 export class PostsService{
-  private posts:Post[] = []
+  private posts:any
   private product= new Subject<Post>()
   private postsUpdated = new Subject<Post[]>()
   constructor(private http: HttpClient){}
@@ -33,11 +33,22 @@ export class PostsService{
     this.http.post("http://localhost:3000/api/upload",data).subscribe()
   }
 
+  
+
   getPostUpdateListener(){
     return this.postsUpdated.asObservable()
   }
   getProductListener(){
     return this.product.asObservable()
   }
+
+  getSpecificProduct(type:string){
+    this.http.get(`http://localhost:3000/api/specificPosts/${type}`).subscribe((response) =>{
+      this.posts = response
+      // console.log(this.posts.posts)
+      this.postsUpdated.next(this.posts.posts);
+    })
+  }
+
 }
 

@@ -34,10 +34,11 @@
     "angular-responsive-carousel": "^2.1.2",
     "bootstrap": "^4.6.1",
     "ng-mat-carousel": "^0.11.1",
-    "rxjs": "~6.6.0"
+    "rxjs": "~6.6.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.1.1",
+    "@angular-devkit/build-angular": "^12.2.16",
     "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
     "@types/jasmine": "~3.6.0",
@@ -51,5 +52,4 @@
     "nodemon": "^2.0.15",
     "typescript": "~4.3.2"
   }
-
 }

@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import {Router} from "@angular/router"
 
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: AuthService,private router:Router) { }
+  constructor(public authService: AuthService) { }
   public isLoading = false
 
 
   ngOnInit(): void {
-    if(this.authService.getisAuth()){
-      this.router.navigate([""])
-    }
+
   }
 
   onLogin(form: NgForm){

@@ -2,7 +2,7 @@ export interface productData{
     title: string,
     price: string,
     specification: string,
-    photo: string,
+    photo: File,
     quantity: number,
     type:string,
 }

@@ -11,7 +11,7 @@
     </div>
     <div  class="Search">
       <input [(ngModel)]="search"  type="text" placeholder="Caută..." onfocus="this.placeholder=''" onblur="this.placeholder='Cauta...'">
-      <div><a (click)="onSearch()"><mat-icon>search</mat-icon></a></div>
+      <div><a (click)="onSearch()" (keydown.enter)="onSearch()"><mat-icon>search</mat-icon></a></div>
     </div>
     <div class="actions">
       <div *ngIf="this.isUserLogin" ><a routerLink="" class="signin">Buna {{username}}</a></div>
@@ -33,15 +33,17 @@
     </div>
 
       <ul (click)="toggle=false">
-        <li><a (click)="onSearchProduct('Televizoare')"  class="categoryStyle" ngModel mat-button>Televizoare</a></li>
-        <hr class="lineStyle" />
-        <li><a (click)="onSearchProduct('Telefoane')" class="categoryStyle" mat-button> Telefoane </a></li>
-        <hr class="lineStyle" />
-        <li><a (click)="onSearchProduct('Aparate_Foto')" class="categoryStyle" mat-button> Aparate Foto</a></li>
-        <hr class="lineStyle" />
-        <li><a (click)="onSearchProduct('Laptopuri')" class="categoryStyle" mat-button> Laptopuri</a></li>
-        <hr class="lineStyle" />
-        <li><a (click)="onSearchProduct('Pc')" class="categoryStyle" mat-button> Pc</a></li>
+        <hr/>
+        <li><a (click)="onSearchProduct('Televizoare')">Televizoare</a></li>
+        <hr/>
+        <li><a (click)="onSearchProduct('Telefoane')"> Telefoane </a></li>
+        <hr/>
+        <li><a (click)="onSearchProduct('Aparate_Foto')"> Aparate Foto</a></li>
+        <hr />
+        <li><a (click)="onSearchProduct('Laptopuri')"> Laptopuri</a></li>
+        <hr />
+        <li><a (click)="onSearchProduct('Pc')"> Pc</a></li>
+        <hr/>
       </ul>
         <span><a  class="sidebarlogo" routerLink="/">Licenta</a></span>
   </div> 
@@ -50,3 +52,6 @@
   <div class="hero">
     <router-outlet></router-outlet>
   </div>
+
+
+

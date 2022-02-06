@@ -1,18 +1,20 @@
 import { Injectable } from "@angular/core"
-import { Subject } from "rxjs"
+import { BehaviorSubject, Subject } from "rxjs"
 import { Post } from "./post.model"
 import { HttpClient } from "@angular/common/http"
-import { Image } from "angular-responsive-carousel"
 
 
 @Injectable({providedIn: 'root'})
 export class PostsService{
   private posts:any
-  private product= new Subject<Post>()
+  private product= new BehaviorSubject<any>({})
   private postsUpdated = new Subject<Post[]>()
   constructor(private http: HttpClient){}
 
-  getPost(){
+  getPostUpdateListener(){
+    return this.postsUpdated.asObservable()
+  }
+  getPost(): void{
     this.http.get<{message:string, posts:Post[]}>("http://localhost:3000/api/posts").subscribe((postData)=>{
       this.posts = postData.posts
       this.postsUpdated.next([...this.posts]);
@@ -20,12 +22,12 @@ export class PostsService{
     });
   }
   getProduct(id:string){
-    this.http.get<Post>(`http://localhost:3000/api/product/${id}`).subscribe((product)=>{
+    this.http.get(`http://localhost:3000/api/product/${id}`).subscribe((product)=>{
       this.product.next(product)
-  }
-  )
+      })
+  return this.product.asObservable()
 }
-  upload(foto:File){
+  upload(foto:File): void{
 
     const data= new FormData();
     data.append("foto",foto)
@@ -35,14 +37,8 @@ export class PostsService{
 
   
 
-  getPostUpdateListener(){
-    return this.postsUpdated.asObservable()
-  }
-  getProductListener(){
-    return this.product.asObservable()
-  }
 
-  getSpecificProduct(type:string){
+  getSpecificProduct(type:string): void{
     this.http.get(`http://localhost:3000/api/specificPosts/${type}`).subscribe((response) =>{
       this.posts = response
       // console.log(this.posts.posts)
@@ -50,7 +46,7 @@ export class PostsService{
     })
   }
 
-  getOnSearch(search:string){
+  getOnSearch(search:string): void{
     this.http.get(`http://localhost:3000/api/search/${search}`).subscribe(response =>{
       this.posts = response
       this.postsUpdated.next(this.posts.posts);

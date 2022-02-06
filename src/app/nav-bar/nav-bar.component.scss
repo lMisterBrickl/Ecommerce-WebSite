@@ -96,9 +96,8 @@
   z-index: 2;
   top: 5em;
   background-color: var(--clr-toolbar);
-  padding: 8em 0.5em 0em 1em;
+  padding-top: 8em;
   transform-origin: left;
-  border-radius: 0 15px 15px 0;
   .sidebarlogo {
     display: none;
   }
@@ -125,8 +124,8 @@
       font-family: "Dongle", sans-serif;
       font-weight: 100;
       padding: 0.5em 0.8em 0.5em 0;
-      width: 100%;
-      text-align: start;
+      width: 8em;
+      text-align: center;
       &:hover {
         background: linear-gradient(
           90deg,
@@ -166,6 +165,10 @@
     display: none;
   }
   .sideBar {
+    a {
+      width: 100%;
+      margin: auto;
+    }
     padding: 3em 0.5em;
     border-radius: 0;
     .login {

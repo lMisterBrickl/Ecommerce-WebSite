@@ -9,11 +9,15 @@
     </figure>
   </div>-->
 
-<a class="banner-action" *ngIf="product" routerLink="product/{{product.id}}">
+
 <div class="carousel">
     <ng-container *ngFor="let item of posts" >
-      <div *ngIf="item.id==product.id" class="banner">
-        <img src={{item.photo}} @image>
+      <a class="banner-action"  routerLink="product/{{item._id}}">
+      <div *ngIf="item._id==product._id" class="banner">
+        <div class="img-container">
+          <img src={{item.photo}} @image>
+        </div>
+        
         <div class="text">
           <h1 class="title" @title>{{item.title}}</h1>
           <p class="description" @text>{{item.specification}}</p>
@@ -21,25 +25,23 @@
           <h1 class="price" @text >{{item.price}}</h1>         
         </div>
        </div>
+       </a>
     </ng-container>
 </div>
-</a>
 
  <div class="prod-grid">
     <div *ngFor="let item of posts" class="content">
-        <a routerLink="product/{{item.id}}" class="img-action">
+        <a routerLink="product/{{item._id}}" class="img-action">
             <img src={{item.photo}} />
           </a>
       <div class="text">
-        <a class="title-text" routerLink="product/{{item.id}}">
+        <a class="title-text" routerLink="product/{{item._id}}">
           <h1 class="title">{{item.title}}</h1>
           <p class="description">{{item.specification}}</p>
         </a>
       
       <div class="price"> 
-        <div class="price-text">
-          <h1  class="new">{{item.price}} Lei</h1>
-        </div>       
+          <h1  class="new">{{item.price}} Lei</h1>     
         <a  class="add" (click)=addToCart(item)>Adauga in cos</a> 
       </div>
       

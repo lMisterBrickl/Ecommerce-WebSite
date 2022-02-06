@@ -18,9 +18,6 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { MatGridListModule} from '@angular/material/grid-list';
-import { MatCarouselModule} from 'ng-mat-carousel';
-import { CarouselComponent } from './carousel/carousel.component'
-import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
@@ -45,7 +42,6 @@ import { ProductPageComponent } from './product-page/product-page.component';
     LoginComponent,
     RegisterComponent,
     MainContentComponent,
-    CarouselComponent,
     AdminLoginComponent,
     AdminRegisterComponent,
     AdministratorComponent,
@@ -67,8 +63,6 @@ import { ProductPageComponent } from './product-page/product-page.component';
     MatCardModule,
     FormsModule,
     MatGridListModule,
-    MatCarouselModule,
-    IvyCarouselModule,
     NgbModule,
     FlexLayoutModule,
     HttpClientModule,

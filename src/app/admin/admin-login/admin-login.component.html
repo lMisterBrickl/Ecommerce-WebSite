@@ -1,17 +1,19 @@
-<mat-card class="matPosition">
-  <h1 style="color: rgb(109, 108, 108);">Admin Login</h1>
-  <form (submit)= "onLogin(postForm)" #postForm = "ngForm">
+<div class="container">
+<mat-card class="card">
+  <h1 >Admin Login</h1>
+  <form (submit)= "onLogin(postForm)" #postForm = "ngForm" class="content">
   <mat-form-field>
     <input matInput type="text" type="text" name="Username" required placeholder="Username" />
   </mat-form-field>
-  <mat-form-field class="loginPosition">
+  <mat-form-field >
     <input matInput type="password" name="Password" required placeholder="Password"/>
   </mat-form-field>
-  <mat-form-field class="loginPosition">
+  <mat-form-field >
     <input matInput type="password" name="permision_code" required placeholder="Permision Code"/>
   </mat-form-field>
-  <button mat-flat-button  class="loginPosition buttons-color"><div class="button-text-aling">Login</div></button>
-  <a href="" class="forgot">Forgot username/password</a>
+  <button mat-raised-button  class="loginPosition buttons-color"><div class="button-text-aling">Login</div></button>
+  <a href="" >Forgot username/password</a>
   </form>
 
 </mat-card>
+</div>

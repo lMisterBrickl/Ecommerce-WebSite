@@ -38,12 +38,12 @@ export class MainContentComponent implements OnInit {
   public i=0
   public product:Post
   
-  images = ["../../assets/images/tvpng.png", "../../assets/images/iphone12.jpg", "../../assets/images/pcscump.jpg", "../../assets/images/TV.jpg"];
 
   constructor(public postService: PostsService,private cartService:CartService) { }
 
   ngOnInit(): void {
     this.postService.getPost()
+    this.cartService.getProduct()
     this.postSub = this.postService.getPostUpdateListener().subscribe((posts:Post[]) => {
       this.posts = posts
       this.product= this.posts[0]

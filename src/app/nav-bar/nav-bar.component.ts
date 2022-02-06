@@ -1,7 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { setClassMetadata } from '@angular/core/src/r3_symbols';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart-service/cart-service';
@@ -38,7 +37,7 @@ export class NavBarComponent implements OnInit,  OnDestroy {
   public isUserLogin = false
   public product : any =[]
   public toggle=false
-  public username:any
+  public username:string
   public newUsername:boolean = false
   public search:string
 
@@ -48,28 +47,19 @@ export class NavBarComponent implements OnInit,  OnDestroy {
 
 
   ngOnInit(): void {
-
+    this.username=localStorage.getItem("username")
     this.isUserLogin = this.authService.getisAuth()
-    this.username = this.authService.getUsername()
-    console.log(this.username)
-    if(this.username && this.isUserLogin){
-      this.newUsername = true
-    }
-    else{
-      this.newUsername = false
-    }
-
+    this.authListenerSubs = this.authService.getAuthListener().subscribe(isUserAuth=>{
+      this.isUserLogin = isUserAuth
+    })
     this.cartService.getProduct().subscribe(res=>{
-      console.log(res)
       for(let i of Object.entries(res)){
         this.product = res.result
       }
       this.numItems = this.product.length
     })
 
-    this.authListenerSubs = this.authService.getAuthListener().subscribe(isUserAuth=>{
-      this.isUserLogin = isUserAuth
-    })
+    
 
    }
   
@@ -80,13 +70,11 @@ export class NavBarComponent implements OnInit,  OnDestroy {
 
   onSearchProduct(form: string){
     let type = form
-    console.log(type)
     this.postService.getSpecificProduct(type)
  }
 
   onLogOut(){
     this.authService.logout()
-    this.username = this.authService.getUsername()
   }
 
   ngOnDestroy(): void {

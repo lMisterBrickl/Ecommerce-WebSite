@@ -1,4 +1,5 @@
 export interface productData{
+    _id:string
     title: string,
     price: string,
     specification: string,

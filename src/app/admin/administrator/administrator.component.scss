@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  padding: 10em 2em;
+  .add {
+    .content {
+      display: flex;
+      flex-direction: column;
+      mat-form-field {
+        color: var(--clr-text);
+      }
+      .foto {
+        margin: 2em;
+      }
+      .search {
+        display: flex;
+        gap: 3em;
+        margin: auto;
+        button {
+          max-height: 3em;
+        }
+      }
+    }
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+::ng-deep .mat-form-field-label {
+  color: var(--clr-text) !important;
+}
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: rgb(255, 255, 255) !important;
+}
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: rgb(255, 255, 255) !important;
+}
+::ng-deep.mat-form-field-outline {
+  color: rgb(255, 255, 255) !important;
+}

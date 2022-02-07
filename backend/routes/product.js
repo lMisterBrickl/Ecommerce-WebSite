@@ -67,7 +67,7 @@ router.get("/search/:search", (req, res) => {
   console.log(req.params.search);
   Product.find({ title: { $regex: req.params.search } }).then((result) => {
     console.log(result);
-    if (result.length < 1) {
+    if (!result) {
       res.status(404).json({
         message: "0 products",
       });
@@ -80,21 +80,33 @@ router.get("/search/:search", (req, res) => {
   });
 });
 router.post("/updateProduct", upload.single("photo"), (req, res, next) => {
-  let newProduct = {
-    title: req.body.title,
-    price: req.body.price,
-    specification: req.body.specification,
-    quantity: parseInt(req.body.quantity),
-    type: req.body.type,
-  };
+  console.log("hi");
+  if (req.body.file) {
+    this.newProduct = {
+      title: req.body.title,
+      price: req.body.price,
+      specification: req.body.specification,
+      photo: "http://" + req.headers.host + "/" + req.file.filename,
+      quantity: parseInt(req.body.quantity),
+      type: req.body.type,
+    };
+  } else {
+    this.newProduct = {
+      title: req.body.title,
+      price: req.body.price,
+      specification: req.body.specification,
+      quantity: parseInt(req.body.quantity),
+      type: req.body.type,
+    };
+  }
   Product.findByIdAndUpdate(
-    { _id: this.searchId },
-    newProduct,
+    { _id: req.body.id },
+    this.newProduct,
     (error, data) => {
       if (error) {
         console.log(error);
       } else {
-        console.log(data);
+        res.status(200).json(data);
       }
     }
   );

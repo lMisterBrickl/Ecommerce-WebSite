@@ -44,15 +44,16 @@ app.get("/api/product/:id", function (req, res, next) {
 app.get("/api/searchProd/:title", (req, res) => {
   Product.findOne({ title: req.params.title }).then((product) => {
     if (!product) {
-      res.status(401).json({
+      res.status(404).json({
         message: "Product doesn't exists",
       });
+    } else {
+      this.searchId = product._id;
+      res.status(200).json({
+        message: "Product was found succesfully",
+        posts: product,
+      });
     }
-    this.searchId = product._id;
-    res.status(200).json({
-      message: "Product was found succesfully",
-      posts: product,
-    });
   });
 });
 

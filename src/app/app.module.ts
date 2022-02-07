@@ -30,11 +30,8 @@ import { AuthInterceptor } from './auth-intercepter';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ProductPageComponent } from './product-page/product-page.component';
-
-
-
-
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +48,8 @@ import { ProductPageComponent } from './product-page/product-page.component';
   ],
   imports: [
     BrowserModule,
+    MatFormFieldModule,
+    MatTabsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,

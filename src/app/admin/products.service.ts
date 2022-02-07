@@ -35,9 +35,9 @@ export class productService{
         })
     }
 
-    updateSearchProduct(title: string, price: string, specification: string, photo: File, quantity: string, type:string){
+    updateSearchProduct(id:string,title: string, price: string, specification: string, photo: File, quantity: string, type:string){
         const newProduct = new FormData();
-  
+        newProduct.append("id",id)
         newProduct.append("title", title)
         newProduct.append("price", price)
         newProduct.append("specification", specification)

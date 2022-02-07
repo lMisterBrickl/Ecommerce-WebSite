@@ -10,8 +10,8 @@
       <span><a  class="logo" routerLink="/">Licenta</a></span>
     </div>
     <div  class="Search">
-      <input [(ngModel)]="search"  type="text" placeholder="Caută..." onfocus="this.placeholder=''" onblur="this.placeholder='Cauta...'">
-      <div><a (click)="onSearch()" (keydown.enter)="onSearch()"><mat-icon>search</mat-icon></a></div>
+      <input [(ngModel)]="search" (keydown.enter)="onSearch()" type="text" placeholder="Caută..." onfocus="this.placeholder=''" onblur="this.placeholder='Cauta...'">
+      <div><a (click)="onSearch()" ><mat-icon>search</mat-icon></a></div>
     </div>
     <div class="actions">
       <div *ngIf="this.isUserLogin" ><a routerLink="" class="signin">Buna {{username}}</a></div>

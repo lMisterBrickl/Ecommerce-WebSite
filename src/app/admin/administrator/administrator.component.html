@@ -1,86 +1,85 @@
-
-<mat-card >
-  <div class="cartDeisign">
-  <h1 style="color: rgb(109, 108, 108);">Add product</h1>
-  <form (submit)= "onAddProduct(prodForm)"  enctype='multipart/form-data'  #prodForm = "ngForm">
-    <mat-form-field>
-      <input matInput type="text" type="text" name="title"  ngModel required placeholder="Title" />
+<div class="container">
+  <div class="add">
+  <h1 >Adauga produs</h1>
+  <form (submit)= "onAddProduct(prodForm)"  enctype='multipart/form-data'  #prodForm = "ngForm" class="content">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" type="text" name="title"  ngModel required/>
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput type="text" type="text" name="specification" ngModel required placeholder="Specification" />
+    <mat-form-field  appearance="outline">
+      <mat-label>Descriere</mat-label>
+      <textarea matInput  name="specification" ngModel required ></textarea>
     </mat-form-field> 
 
-    <mat-form-field >
-      <input matInput type="text" name="price" ngModel required placeholder="Price"/>
+    <mat-form-field appearance="outline">
+      <mat-label>Pret</mat-label>
+      <input matInput type="text" name="price" ngModel required />
     </mat-form-field>
 
-    <mat-form-field > 
-      <input matInput type="text" name="quantity" ngModel required placeholder="quantity"/>
-  </mat-form-field> 
 
-  <div >
-      <button type="button" mat-raised-button  (click)="fileInput.click()">Choose File</button>
+  <div class="foto">
+      <button type="button" mat-raised-button  (click)="fileInput.click()">Foto</button>
       <input  name='photo' hidden #fileInput (change)="saveFile($event)" ngModel   type="file" id="file">
   </div> 
 
-    <mat-form-field > 
-        <input matInput type="text" name="type" ngModel required placeholder="Type"/>
+    <mat-form-field appearance="outline"> 
+      <mat-label>Categorie</mat-label>
+        <input matInput type="text" name="type" ngModel required />
     </mat-form-field>
     
     <br>
-      <button mat-flat-button color="primary" class="button-animation"><div>Create</div></button>
+      <button mat-flat-button color="primary" class="button-animation"><div>Adauga</div></button>
   </form>
   </div>
-</mat-card>
 
-<mat-card class="mat-position"  >
 
-    <div class="cartDeisign">
-    <h1 style="color: rgb(109, 108, 108);">Update/Delete Product </h1>
-   
-    <mat-form-field>
-      <input matInput type="text" type="text" name="title"  [(ngModel)]="title" required placeholder="Title" />
+    <div class="add">
+    <h1>Update/Delete Product </h1>
+   <div class="content">
+     <div class="search">
+    <mat-form-field appearance="outline" > 
+      <mat-label>Cauta produs</mat-label>
+      <input matInput type="text"  [(ngModel)]='search' required />
+  </mat-form-field>
+    <button (click)='onSearchProduct()' mat-raised-button color="primary">Search</button>
+     </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" type="text" name="title"  [(ngModel)]="title" required />
     </mat-form-field>
 
-     <mat-form-field>
-      <input matInput type="text" type="text" name="specification" [(ngModel)]="specification" required placeholder="Specification" />
+     <mat-form-field appearance="outline">
+       <mat-label>Descriere</mat-label>
+      <textarea matInput type="text" type="text" name="specification" [(ngModel)]="specification" ></textarea>
     </mat-form-field> 
 
-    <mat-form-field >
-      <input matInput type="text" name="price" [(ngModel)]="price" required placeholder="Price"/>
+    <mat-form-field appearance="outline">
+      <mat-label>Pret</mat-label>
+      <input matInput type="text" name="price" [(ngModel)]="price" required/>
     </mat-form-field>
 
-     <mat-form-field > 
-      <input matInput type="text" name="quantity" [(ngModel)]="quantity" required placeholder="quantity"/>
-   </mat-form-field>
-
-   <div >
-    <button type="button" mat-raised-button  (click)="fileInput.click()">Choose File</button>
+   <div class="foto">
+    <button type="button" mat-raised-button  (click)="fileInput.click()">Foto</button>
     <input  name='photo' hidden #fileInput (change)="saveFile($event)" ngModel   type="file" id="file">
   </div> 
 
-    <mat-form-field > 
-        <input matInput type="text" name="type" [(ngModel)]="type" required placeholder="Type"/>
+    <mat-form-field appearance="outline"> 
+      <mat-label>Categorie</mat-label>
+        <input matInput type="text" name="type" [(ngModel)]="type" required/>
     </mat-form-field>
 
     <br>
-    <div class="buttons">
-      <div>
+      
        
-        <mat-form-field > 
-          <input matInput type="text"  [(ngModel)]='search' required placeholder="Search/Title"/>
-      </mat-form-field>
-        <button (click)='onSearchProduct()' mat-flat-button  class="button-animation" color="accent"><div>Search</div></button>
 
       
-      </div>
-      <div class="mat-buttonPos">
-        <button mat-flat-button color="primary" (click)='updateSearchProduct()'  class="button-animation"><div>Update</div></button>
-        <button mat-flat-button color="warn" (click)='deleteProduct()' class="button-animation"><div >Delete</div></button>
-      </div>
       
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)='updateSearchProduct()'  class="button-animation">Update</button>
+        <button mat-flat-button color="warn" (click)='deleteProduct()' class="button-animation" >Delete</button>
     </div>
-    
+      
+
     </div>
-  </mat-card>
+</div>

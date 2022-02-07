@@ -7,7 +7,7 @@ import { productService } from '../products.service';
 @Component({
   selector: 'app-administrator',
   templateUrl: './administrator.component.html',
-  styleUrls: ['./administrator.component.css']
+  styleUrls: ['./administrator.component.scss']
 })
 @Injectable()
 export class AdministratorComponent implements OnInit {
@@ -18,9 +18,10 @@ export class AdministratorComponent implements OnInit {
   public price:string
   public specification:string
   public photo:File
-  public quantity:number
+  public quantity=1
   public search :string
   public isAdmin=1
+  private id=''
  
   constructor(public productService: productService, private authService:AuthService) { }
 
@@ -50,6 +51,7 @@ export class AdministratorComponent implements OnInit {
     else{
       this.productService.searchProduct(this.search)
       this.srcResult = this.productService.getSearchedProd().subscribe(res=>{
+        this.id=res._id
         console.log(res)
         this.title = res.title
         this.price = res.price
@@ -68,6 +70,7 @@ export class AdministratorComponent implements OnInit {
       return
     }
     else{
+      window.confirm("Stergere va fi ireversibila")
         this.productService.deleteSearchProduct(this.title)
     }
   }
@@ -77,7 +80,7 @@ export class AdministratorComponent implements OnInit {
       return
     }
     else{
-        this.productService.updateSearchProduct(this.title, this.price, this.specification, this.photo, this.quantity.toString(), this.type)
+        this.productService.updateSearchProduct(this.id,this.title, this.price, this.specification, this.photo, this.quantity.toString(), this.type)
     }
   }
 
